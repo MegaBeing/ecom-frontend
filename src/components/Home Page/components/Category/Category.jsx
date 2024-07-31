@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { tempCatList } from './components/data'
+import { tempCatList } from '../../../../assets/data'
 import CategoryItem from './components/CategoryList'
 const Div = styled.div`
     margin-top: 100px;

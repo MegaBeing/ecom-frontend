@@ -1,8 +1,7 @@
 import Carousel from 'react-bootstrap/Carousel';
 import styled from 'styled-components';
-import { tempCatList } from './Category/components/data';
+import { tempCatList } from '../../../assets/data.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import ExampleCarouselImage from 'components/ExampleCarouselImage';
 const Image = styled.img`
     width: 100%;
     height: 400px;
@@ -12,15 +11,9 @@ const Image = styled.img`
 export default function Corousel() {
     return (
         <Carousel>
-            <Carousel.Item>
-                <Image src={tempCatList[0].imageUrl} alt="First slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-                <Image src={tempCatList[1].imageUrl} alt="Second slide" />
-            </Carousel.Item>
-            <Carousel.Item>
-                <Image src={tempCatList[2].imageUrl} alt="Third slide" />
-            </Carousel.Item>
+            {tempCatList.map((ele,index) => (<Carousel.Item>
+                <Image key = {index} src={ele.imageUrl} alt="First slide" />
+            </Carousel.Item>))}
         </Carousel>
     )
 }
