@@ -5,6 +5,8 @@ import { CSSTransition } from 'react-transition-group';
 import { useRef, useEffect, useState } from 'react';
 import NavCont from './components/NavContent';
 const Navbar = styled.nav`
+  position: fixed;
+  top: 0;
   width: 100%;
   height: 75px;
   background-color: #e6e6e6;
