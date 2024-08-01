@@ -31,13 +31,16 @@ const NavContent = styled.div`
 const Heading = styled.h1`
   margin-left: 10px;
   font-weight: 100;
+  color: black;
 `;
 
 export default function NavCont({ search, setSearchState }) {
 
   return (<NavContent className='nav-content'>
     <NavDrawer />
+    <Link to='/' style={{textDecoration: 'none'}}>
     <Heading>BatuaWala</Heading>
+    </Link>
     <Stack direction="row" spacing={1}>
       <Link to='/cart'>
         <IconButton color="primary" aria-label="add to shopping cart">

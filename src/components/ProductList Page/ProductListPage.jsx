@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { tempCatList } from '../../assets/data'
 import SingleProductDisplay from './components/SingleProductDisplay';
 import Pagination from '@mui/material/Pagination';
+
 const Container = styled.div`
     width: 100%;
     height: fit-content;
@@ -12,8 +13,8 @@ const Container = styled.div`
     align-items:center;
 `
 const Message = styled.div`
-margin:10px;
-color:#a84c32;
+    margin:10px;
+    color:#a84c32;
 `
 const PaginationWrapper = styled.div`
     margin-top: 20px;
