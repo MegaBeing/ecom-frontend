@@ -30,7 +30,9 @@ export default function CartPage() {
                 />))}
             </CartContainer>
             <ButtonContainer>
-                <Button sx={{ width: '90%',borderRadius: '30px' }} variant="contained">Checkout</Button>
+                <Button 
+                sx={{ width: '90%',borderRadius: '30px' }} 
+                variant="contained">Checkout</Button>
             </ButtonContainer>
         </>
     );
