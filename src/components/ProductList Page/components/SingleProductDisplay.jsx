@@ -3,12 +3,12 @@ import { ButtonBase } from '@mui/material'
 
 const Container = styled.div`
     width: 200px;
-    height: 200px;
+    height: 250px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:start;
     align-items:start;
-    padding:2%;
+    padding:0 2%;
     border-radius: 10px;
     margin: 10px 5px;
 `
@@ -57,7 +57,10 @@ const Discount = styled.div`
 color: green;
 
 `
-export default function SingleProductDisplay({ imageUrl, caption, price, previousPrice, discount }) {
+export default function SingleProductDisplay({ imageUrl, caption, price, previousPrice }) {
+    let priceInt = parseInt(price);
+    let previousPriceInt = parseInt(previousPrice);
+    let discount = Math.round((previousPriceInt - priceInt) / previousPriceInt * 100);
     return (
         <ButtonBase sx={{
             borderRadius: '30px',
@@ -68,13 +71,13 @@ export default function SingleProductDisplay({ imageUrl, caption, price, previou
                 <Caption>{caption}</Caption>
                 <NumContainer>
                     <PriceContainer>
-                        {price}
+                        {`₹ ${price}`}
                         <PreviousPrice>
-                            {previousPrice}
+                            {`₹ ${previousPrice}`}
                         </PreviousPrice>
                     </PriceContainer>
                     <Discount>
-                        {discount}
+                        {`${discount}% off`}
                     </Discount>
                 </NumContainer>
             </Container>
