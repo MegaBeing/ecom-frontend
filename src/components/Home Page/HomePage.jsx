@@ -21,8 +21,8 @@ export default function Home() {
     return (
     <>
         <Corousel imageList={offer}/> 
+        <FlatDisplayComponent heading='New Arrivals'/>
         <Category />
-        <FlatDisplayComponent/>
     </>        
     );
 }

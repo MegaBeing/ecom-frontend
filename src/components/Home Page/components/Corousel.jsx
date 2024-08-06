@@ -8,12 +8,11 @@ const Image = styled.img`
 `;
 
 export default function Corousel({imageList}) {
-    const url = import.meta.env.VITE_API_URL;    
     if(!imageList) return null;
     return (
         <Carousel>
             {imageList.map((value) => (<Carousel.Item>
-                <Image key={value.id} src={`${url}${value.image}`} alt="First slide" />
+                <Image key={value.id} src={value.image} alt="First slide" />
             </Carousel.Item>))}
         </Carousel>
     )

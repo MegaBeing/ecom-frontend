@@ -4,6 +4,8 @@ import InputField from './components/InputField';
 import { CSSTransition } from 'react-transition-group';
 import { useRef, useEffect, useState } from 'react';
 import NavCont from './components/NavContent';
+import { IconButton } from '@mui/material';
+import Search from '@mui/icons-material/Search';
 const Navbar = styled.nav`
   position: fixed;
   top: 0;
@@ -50,7 +52,10 @@ const SearchContainer = styled.div`
 const StyledLogo = styled.div`
   margin-left: 10px;
 `;
-
+const SearchTextContainer = styled.div`
+display: flex;
+align-items: center;
+`
 
 export default function NavBar() {
     const [search, setSearchState] = useState(false);
@@ -85,7 +90,12 @@ export default function NavBar() {
                     <StyledLogo>
                         <AutoAwesomeMosaicIcon />
                     </StyledLogo>
+                    <SearchTextContainer>
                     <InputField componentName='search' searchState={search} />
+                    <IconButton color='primary'>
+                      <Search />
+                    </IconButton>
+                    </SearchTextContainer>
                 </SearchContainer>
             </CSSTransition>
         </Navbar>

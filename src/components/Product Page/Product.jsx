@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import { tempCatList } from '../../assets/data';
 import Corousel from '../Home Page/components/Corousel';
 import Rating from '@mui/material/Rating';
-import { Button } from '@mui/material';
+import { Button, stepButtonClasses } from '@mui/material';
 import Collapsible from './components/Collapsible';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from'react';
 const TitleContainer = styled.div`
     width: 100%;
     display: flex;
@@ -74,47 +76,50 @@ const AddToCartButtonContainer = styled.div`
     align-items:center;
     padding-bottom: 3%;
 `
-export default function Product({ product_id }) {
-    const Product = {
-        id: product_id,
-        name: 'Brown Clutch',
-        price: '₹999',
-        previous_price: '₹1200',
-        category: tempCatList[0].category,
-        rating: 3.5,
-        description: `Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus
-          terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer
-          labore wes anderson cred nesciunt sapiente ea proident.`,
+export default function Product() {
+    const { id } = useParams();
+    const api_url = import.meta.env.VITE_API_URL;
+    const [product, setProductsState] = useState({});
+    useEffect(() => {
+        productData();
+    }, [id])
+    const productData = async () => {
+        try{
+        const response = await fetch(`${api_url}/products/${id}`)
+        const data = await response.json();
+        setProductsState(data);
+        }
+        catch(error){
+            console.error('Error:', error);
+        }
     }
-    const price_num = parseInt(Product.price.slice(1, Product.price.length));
-    const previous_price_num = parseInt(Product.previous_price.slice(1, Product.previous_price.length))
     return (
         <>
-            <Corousel imageList={tempCatList} />
+            <Corousel imageList={product.images} />
             <TitleContainer>
                 <NameCatContainer>
                     <ProductName>
-                        {Product.name}
+                        {product.product_name}
                     </ProductName>
-                    {Product.category}
+                    {product.product_category}
                 </NameCatContainer>
                 <PriceContainer>
-                    {Product.price}
+                    {`₹${product.price}`}
                 </PriceContainer>
             </TitleContainer>
             <SecondContainer>
                 <RatingContainer>
                     <Rating name="read-only" value={Math.round(Product.rating)} readOnly />
-                    {Product.rating}
+                    {product.rating}
                 </RatingContainer>
                 <DiscountContainer>
                     <PreviousPriceContainer>
-                        {Product.previous_price}
+                        {`₹${product.previous_price}`}
                     </PreviousPriceContainer>
-                    <Discount>{Math.round(((previous_price_num - price_num) / previous_price_num) * 100)}% off</Discount>
+                    <Discount>{Math.round(((product.previous_price - product.price) / product.previous_price) * 100)}% off</Discount>
                 </DiscountContainer>
             </SecondContainer>
-            <Collapsible description={Product.description} />
+            <Collapsible description={product.description} />
             <AddToCartButtonContainer>
                 <Button sx={{width:'90%',borderRadius:'20px',backgroundColor:'gray'}} variant='contained' color='primary'>Add To Cart</Button>
             </AddToCartButtonContainer>

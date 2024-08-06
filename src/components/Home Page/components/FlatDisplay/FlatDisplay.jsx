@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { tempCatList } from "../../../../assets/data";
 import SingleFlatDisplayComponent from "./components/SingleFlatDisplayComponent";
 const Div = styled.div`
+    margin-top: 50px;
     width: 100%;
     display: flex;
     align-items:center;
@@ -19,10 +20,11 @@ const ComponentWrapper = styled.div`
     box-shadow: 0 0 10px gray;
     border-radius: 10px;
 `;
-export default function FlatDisplayComponent() {
+export default function FlatDisplayComponent({heading}) {
+
     return (
         <Div>
-            <h1>New Offers</h1>
+            <h1>{heading}</h1>
             <ComponentWrapper>
                 {tempCatList.map((ele, index) => (<SingleFlatDisplayComponent
                     key={index}

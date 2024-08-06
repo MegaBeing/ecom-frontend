@@ -3,9 +3,8 @@ import { tempCatList } from '../../../../assets/data'
 import CategoryItem from './components/CategoryList'
 import { Link } from 'react-router-dom'
 const Div = styled.div`
-    margin-top: 100px;
     width: 100%;
-    height: 500px;
+    height: 475px;
     display: flex;
     direction: row;
     justify-content: space-around;
@@ -13,7 +12,7 @@ const Div = styled.div`
     flex-wrap: wrap;
 `
 const StyledLink = styled(Link)`
-    width: 40%;
+    width: 45%;
     height: 200px;
     text-decoration: none;
 `

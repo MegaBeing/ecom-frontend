@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { ButtonBase } from '@mui/material'
-
+import { Link } from "react-router-dom";
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    width:fit-content;
+    height: fit-content;
+    color: black;
+`
 const Container = styled.div`
     width: 200px;
     height: 250px;
@@ -57,30 +63,32 @@ const Discount = styled.div`
 color: green;
 
 `
-export default function SingleProductDisplay({ imageUrl, caption, price, previousPrice }) {
+export default function SingleProductDisplay({ id,imageUrl, caption, price, previousPrice }) {
     let priceInt = parseInt(price);
     let previousPriceInt = parseInt(previousPrice);
     let discount = Math.round((previousPriceInt - priceInt) / previousPriceInt * 100);
     return (
-        <ButtonBase sx={{
-            borderRadius: '30px',
-            // border:'1px solid black'
-        }}>
-            <Container>
-                <Image src={imageUrl} alt='Product Image' />
-                <Caption>{caption}</Caption>
-                <NumContainer>
-                    <PriceContainer>
-                        {`₹ ${price}`}
-                        <PreviousPrice>
-                            {`₹ ${previousPrice}`}
-                        </PreviousPrice>
-                    </PriceContainer>
-                    <Discount>
-                        {`${discount}% off`}
-                    </Discount>
-                </NumContainer>
-            </Container>
-        </ButtonBase>
+        <StyledLink to={`/product/${id}`}>
+            <ButtonBase sx={{
+                borderRadius: '30px',
+                // border:'1px solid black'
+            }}>
+                <Container>
+                    <Image src={imageUrl} alt='Product Image' />
+                    <Caption>{caption}</Caption>
+                    <NumContainer>
+                        <PriceContainer>
+                            {`₹ ${price}`}
+                            <PreviousPrice>
+                                {`₹ ${previousPrice}`}
+                            </PreviousPrice>
+                        </PriceContainer>
+                        <Discount>
+                            {`${discount}% off`}
+                        </Discount>
+                    </NumContainer>
+                </Container>
+            </ButtonBase>
+        </StyledLink>
     );
 }

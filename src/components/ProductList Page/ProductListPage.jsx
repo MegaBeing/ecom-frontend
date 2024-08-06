@@ -55,7 +55,6 @@ export default function ProductListPage() {
             if (url.endsWith('&')) {
                 url = url.slice(0, -1);
             }
-            console.log(url);
             const response = await fetch(url);
             const data = await response.json();
             setProductsState(data);
@@ -71,6 +70,7 @@ export default function ProductListPage() {
                 {products.map((ele) => (
                     <SingleProductDisplay
                         key={ele.id}
+                        id = {ele.id}
                         imageUrl={`${api_url}/${ele.images[0].image}`}
                         caption={ele.product_name}
                         price={ele.price}
