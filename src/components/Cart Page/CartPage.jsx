@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import { tempCatList } from '../../assets/data';
 import SingleCartItem from './components/SingleCartItem';
 import { Button } from '@mui/material';
+import { useEffect, useState } from 'react';
+import NoAuthCart from './components/NoAuthCart';
 const CartContainer = styled.div`
     margin-top: 30px;
     width:100%;
@@ -18,22 +19,52 @@ const ButtonContainer = styled.div`
     justify-content:center;
 `
 export default function CartPage() {
+    const api_url = import.meta.env.VITE_API_URL;
+    const [cartList, setCartList] = useState([]);
+    const cartData = async () => {
+        try {
+            const response = await fetch(`${api_url}/user/cart`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                }
+            });
+            const data = await response.json();
+            console.log(data[0]);
+            setCartList(data[0]);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    };
+
+    useEffect(() => {
+        cartData();
+    }, []);
+
     return (
-        <>
-            <CartContainer>
-                {tempCatList.map((ele, index) => (<SingleCartItem
-                    key={index}
-                    itemQuantity="1"
-                    itemPrice='₹999'
-                    itemName={ele.category}
-                    imageUrl={ele.imageUrl}
-                />))}
-            </CartContainer>
-            <ButtonContainer>
-                <Button 
-                sx={{ width: '90%',borderRadius: '30px' }} 
-                variant="contained">Checkout</Button>
-            </ButtonContainer>
-        </>
+        cartList.length !== 0 ? (
+            <>
+                <CartContainer>
+                    {cartList.cart_items.map((ele) => (
+                        <SingleCartItem
+                            key={ele.id}
+                            itemQuantity={ele.quantity}
+                            product={ele.product}
+                        />
+                    ))}
+                </CartContainer>
+                <ButtonContainer>
+                    <Button
+                        sx={{ width: '90%', borderRadius: '30px' }}
+                        variant="contained"
+                    >
+                        Checkout
+                    </Button>
+                </ButtonContainer>
+            </>
+        ) : (
+            <NoAuthCart />
+        )
     );
 }

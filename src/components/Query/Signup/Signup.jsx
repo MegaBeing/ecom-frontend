@@ -32,8 +32,8 @@ export default function Signup() {
             });
             if (response.status == 201) {
                 const data = await response.json();
-                localStorage.setItem('access_token', data.access);
-                localStorage.setItem('refresh_token', data.refresh);
+                localStorage.setItem('access_token', data.access_token);
+                localStorage.setItem('refresh_token', data.refresh_token);
                 navigate('/');
             } else {
                 alert('User already exists');

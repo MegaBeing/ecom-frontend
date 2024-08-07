@@ -4,9 +4,11 @@ import { ButtonBase } from '@mui/material';
 import Collapse from 'react-bootstrap/Collapse';
 import downArrow from '/down-arrow.svg'
 const Container = styled.div`
+    position: relative;
     margin-top: 30px;
 `
 const DescriptionContainer = styled.div`
+    position: relative;
     width:100%; 
     display:block;
     border-top: 1px solid black;
@@ -20,7 +22,13 @@ const ButtonContainer = styled.div`
     font-size: 10px;
 `
 const Heading = styled.span`
-    font-size: 15px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-left:10px;
+`
+
+const TextContainer = styled.div`
+    width:90%;
     margin-left:10px;
 `
 const Image = styled.img`
@@ -50,9 +58,9 @@ function Collapsible({ description }) {
                     </ButtonBase>
                 </ButtonContainer>
                 <Collapse in={open}>
-                    <div style={{padding:'2%'}} id="example-collapse-text">
+                    <TextContainer id="example-collapse-text">
                         {description}
-                    </div>
+                    </TextContainer>
                 </Collapse>
             </DescriptionContainer>
         </Container>

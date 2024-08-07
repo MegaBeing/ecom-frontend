@@ -67,7 +67,7 @@ const Discount = styled.span`
     color: #009922;
 `
 const AddToCartButtonContainer = styled.div`
-    position:fixed;
+    position:absolute;
     bottom:0px;
     width:100%;
     height:40px;

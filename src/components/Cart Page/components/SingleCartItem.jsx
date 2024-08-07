@@ -54,7 +54,7 @@ const ButtonContainer = styled.div`
     align-items:center;
     box-shadow: 0 2px 5px gray;
 `
-export default function SingleCartItem({ imageUrl, itemName, itemPrice, itemQuantity }) {
+export default function SingleCartItem({ product, itemQuantity }) {
     itemQuantity = parseInt(itemQuantity)
     const [quantity, setQuantityState] = useState(itemQuantity);
     const SubtractQuantity = () => {
@@ -65,14 +65,14 @@ export default function SingleCartItem({ imageUrl, itemName, itemPrice, itemQuan
     }
     return (
         <ItemContainer>
-            <Image src={imageUrl} />
+            <Image src={product.images[0].image} />
             <InfoButContainer>
                 <InfoContainer>
                     <ItemName>
-                        {itemName}
+                        {product.product_name}
                     </ItemName>
                     <PriceContainer>
-                        {itemPrice}
+                        {`₹${product.price}`}
                     </PriceContainer>
                 </InfoContainer>
                 <ButtonContainer>
