@@ -18,7 +18,7 @@ const ButtonContainer = styled.div`
     align-items:center;
     justify-content:center;
 `
-export default function CartPage() {
+export default function CartPage({isAuth}) {
     const api_url = import.meta.env.VITE_API_URL;
     const [cartList, setCartList] = useState([]);
     const cartData = async () => {
@@ -31,7 +31,7 @@ export default function CartPage() {
                 }
             });
             const data = await response.json();
-            console.log(data[0]);
+            // console.log(data[0]);
             setCartList(data[0]);
         } catch (error) {
             console.error('Error:', error);
@@ -43,7 +43,7 @@ export default function CartPage() {
     }, []);
 
     return (
-        cartList.length !== 0 ? (
+        (isAuth && cartList.length !== 0) ? (
             <>
                 <CartContainer>
                     {cartList.cart_items.map((ele) => (

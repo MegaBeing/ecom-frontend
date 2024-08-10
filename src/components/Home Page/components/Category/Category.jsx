@@ -22,7 +22,7 @@ export default function Category() {
         <Div>
             {tempCatList.map((item) => (
                 <StyledLink to={`/product-list?category=${item.category}`}>
-                    <CategoryItem key={Math.random()} {...item} />
+                    <CategoryItem key={item.category} {...item} />
                 </StyledLink>
             ))}
         </Div>

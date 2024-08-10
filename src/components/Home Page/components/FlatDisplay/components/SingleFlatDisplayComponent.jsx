@@ -16,7 +16,7 @@ const ComponentWrapper = styled.div`
 `
 const Image = styled.img`
   width:30%;
-  height:60%;
+  height:80%;
   object-fit:cover;
   margin: 2%;
   border-radius: 30px;

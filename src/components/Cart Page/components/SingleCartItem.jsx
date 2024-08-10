@@ -57,11 +57,58 @@ const ButtonContainer = styled.div`
 export default function SingleCartItem({ product, itemQuantity }) {
     itemQuantity = parseInt(itemQuantity)
     const [quantity, setQuantityState] = useState(itemQuantity);
-    const SubtractQuantity = () => {
-        setQuantityState(Math.max(1, quantity - 1));
+    const SubtractQuantity = async (product_id) => {
+        try {
+            const body = JSON.stringify({
+                'product_id':product_id
+            })
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/user/cart/remove-from-cart/`,
+                {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    },
+                    body: body
+                })
+            if (response.status == 200) {
+                setQuantityState(Math.max(1, quantity - 1));
+            }
+            else {
+                throw new Error('Failed to remove item from cart');
+            }
+        }
+        catch (error) {
+            console.error('Error:', error);
+        }
+
     }
-    const AddQuantity = () => {
-        setQuantityState(quantity + 1);
+    const AddQuantity = async (product_id, itemQuan) => {
+        try {
+            const body = JSON.stringify({
+                'product_id':product_id,
+                'quantity':itemQuan
+            })
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/user/cart/add_to_cart/`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    },
+                    body:body
+
+                })
+            if (response.status == 200) {
+                setQuantityState(quantity + 1);
+            }
+            else {
+                throw new Error('Failed to add item to cart');
+            }
+        } catch (error) {
+            console.error(error);
+        }
+
     }
     return (
         <ItemContainer>
@@ -76,11 +123,11 @@ export default function SingleCartItem({ product, itemQuantity }) {
                     </PriceContainer>
                 </InfoContainer>
                 <ButtonContainer>
-                    <IconButton onClick={() => SubtractQuantity()}>
+                    <IconButton onClick={() => SubtractQuantity(product.id)}>
                         <RemoveIcon />
                     </IconButton>
                     {quantity}
-                    <IconButton onClick={() => AddQuantity()}>
+                    <IconButton onClick={() => AddQuantity(product.id, quantity)}>
                         <AddIcon />
                     </IconButton>
                 </ButtonContainer>
