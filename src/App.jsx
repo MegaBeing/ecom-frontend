@@ -1,7 +1,7 @@
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
+import { useMediaQuery } from 'react-responsive'
 // Page Imports
 import Home from './components/Home Page/HomePage';
 import NavBar from './components/Navigation Bar/NavBar';
@@ -9,8 +9,9 @@ import ProductListPage from './components/ProductList Page/ProductListPage';
 import CartPage from './components/Cart Page/CartPage';
 import Product from './components/Product Page/Product';
 import Authenticate from './components/Query/Authenticate.jsx';
-import OrderListPage from './components/Order Page/OrderListPage.jsx';
-
+import OrderListPage from './components/OrderList Page/OrderListPage.jsx';
+import OrderPage from './components/Order Page/OrderPage.jsx';
+import DesktopMessage from './components/DesktopMessage.jsx';
 async function Refresh(refresh_token, api_url) {
   try {
     const body = JSON.stringify({ 'refresh': refresh_token });
@@ -60,7 +61,10 @@ async function CheckAuth(api_url) {
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const api_url = import.meta.env.VITE_API_URL;
-
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  const isDesktopOrLaptop = useMediaQuery({
+    query: '(min-width: 1224px)'
+  })
   useEffect(() => {
     const checkAuth = async () => {
       const auth = await CheckAuth(api_url);
@@ -70,21 +74,26 @@ function App() {
     checkAuth();
   }, []);
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/cart' element={<CartPage isAuth={isAuth} />} />
-        <Route path='/product-list' element={<ProductListPage />} />
-        <Route path='/product/:id' element={<Product isAuth={isAuth} />} />
-        <Route path='/auth' element={<Authenticate setIsAuth={setIsAuth} />} />
-        <Route path='/my-orders' element={<OrderListPage isAuth={isAuth} />} />
-        <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
-        <Route path='/rating-form' element={<h1>Rating Form</h1>} />
-        <Route path='/custom-order' element={<h1>Custom Order</h1>} />
-        <Route path='/my-account' element={<h1>My Account</h1>} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      {isTabletOrMobile && (<BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<CartPage isAuth={isAuth} />} />
+          <Route path='/product-list' element={<ProductListPage />} />
+          <Route path='/product/:id' element={<Product isAuth={isAuth} />} />
+          <Route path='/auth' element={<Authenticate setIsAuth={setIsAuth} />} />
+          <Route path='/my-orders' element={<OrderListPage isAuth={isAuth} />} />
+          <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
+          <Route path='/rating-form' element={<h1>Rating Form</h1>} />
+          <Route path='/custom-order' element={<h1>Custom Order</h1>} />
+          <Route path='/my-account' element={<h1>My Account</h1>} />
+        </Routes>
+      </BrowserRouter>)}
+      {isDesktopOrLaptop && 
+        <DesktopMessage/>
+      }
+    </>
   );
 }
 

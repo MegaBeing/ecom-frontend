@@ -20,6 +20,7 @@ const Image = styled.img`
   object-fit:cover;
   margin: 2%;
   border-radius: 30px;
+  margin-left:15px;
 `
 const Div = styled.div`
 text-align:start;

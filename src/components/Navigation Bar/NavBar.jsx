@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import AutoAwesomeMosaicIcon from '@mui/icons-material/AutoAwesomeMosaic';
+import CloseIcon from '@mui/icons-material/Close';
 import InputField from './components/InputField';
 import { CSSTransition } from 'react-transition-group';
 import { useRef, useEffect, useState } from 'react';
@@ -10,11 +10,12 @@ const Navbar = styled.nav`
   position: fixed;
   top: 0;
   width: 100%;
-  height: 75px;
+  height: 70px;
   background-color: #e6e6e6;
-  box-shadow: 0 0 10px gray;
+  box-shadow: 0 0 4px gray;
   position: relative;
   overflow: hidden;
+  border-radius: 0 0 20px 20px;
 `;
 
 const SearchContainer = styled.div`
@@ -30,20 +31,20 @@ const SearchContainer = styled.div`
   padding: 0 10px;
 
   &.search-enter {
-    transform: translateX(50%);
+    transform: translateY(100%);
     opacity: 0.3;
   }
   &.search-enter-active {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
     transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
   }
   &.search-exit {
-    transform: translateX(0);
+    transform: translateY(0);
     opacity: 1;
   }
   &.search-exit-active {
-    transform: translateX(100%);
+    transform: translateY(100%);
     opacity: 0;
     transition: transform 400ms ease-in-out, opacity 400ms ease-in-out;
   }
@@ -60,25 +61,6 @@ align-items: center;
 export default function NavBar() {
     const [search, setSearchState] = useState(false);
     const searchContainerRef = useRef(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (search && searchContainerRef.current && !searchContainerRef.current.contains(event.target)) {
-                setSearchState(false);
-            }
-        };
-
-        if (search) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside);
-        };
-    }, [search]);
-
     return (
         <Navbar>
             <CSSTransition in={!search} timeout={400} classNames='nav-content' unmountOnExit>
@@ -87,9 +69,9 @@ export default function NavBar() {
 
             <CSSTransition in={search} timeout={400} classNames="search" unmountOnExit>
                 <SearchContainer ref={searchContainerRef}>
-                    <StyledLogo>
-                        <AutoAwesomeMosaicIcon />
-                    </StyledLogo>
+                    <IconButton onClick={() => setSearchState(!search)}>
+                        <CloseIcon/>
+                    </IconButton>
                     <SearchTextContainer>
                     <InputField componentName='search' searchState={search} />
                     <IconButton color='primary'>

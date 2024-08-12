@@ -10,10 +10,9 @@ const CategoryCard = styled(Card)`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2%;
   border: 1px solid #ccc;
   box-shadow: 0 0 5px gray;
-  border-radius: 10px;
+  border-radius: 20px;
 `
 
 const ActionContainer = styled(CardActionArea)`
@@ -34,7 +33,7 @@ const sx = { width: '80%',
     height: '50%', 
     objectFit: 'cover', 
     alignItems: 'center', 
-    borderRadius: '10px', 
+    borderRadius: '20px', 
     marginLeft: 'auto', 
     marginRight: 'auto' };
 export default function CategoryItem({ category, imageUrl }) {

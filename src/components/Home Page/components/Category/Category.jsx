@@ -4,11 +4,11 @@ import CategoryItem from './components/CategoryList'
 import { Link } from 'react-router-dom'
 const Div = styled.div`
     width: 100%;
-    height: 475px;
     display: flex;
     direction: row;
     justify-content: space-around;
     align-items: center;
+    gap: 20px;
     flex-wrap: wrap;
 `
 const StyledLink = styled(Link)`
@@ -20,9 +20,9 @@ export default function Category() {
 
     return (
         <Div>
-            {tempCatList.map((item) => (
+            {tempCatList.map((item,index) => (
                 <StyledLink to={`/product-list?category=${item.category}`}>
-                    <CategoryItem key={item.category} {...item} />
+                    <CategoryItem key={index} {...item} />
                 </StyledLink>
             ))}
         </Div>

@@ -3,6 +3,10 @@ import Category from "./components/Category/Category";
 import FlatDisplayComponent from "./components/FlatDisplay/FlatDisplay";
 import { useEffect, useState } from "react";
 import Loading from "../Loading";
+import styled from 'styled-components'
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 export default function Home() {
     const [offer, setOfferState] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -28,8 +32,10 @@ export default function Home() {
         return <Loading />;
     return (
         <>
+            <Spacer height={10}/>
             <Corousel imageList={offer} />
             <FlatDisplayComponent heading='New Arrivals' />
+            <Spacer height={20}/>
             <Category />
         </>
     );
