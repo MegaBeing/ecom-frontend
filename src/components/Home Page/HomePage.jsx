@@ -34,9 +34,9 @@ export default function Home() {
         <>
             <Spacer height={10}/>
             <Corousel imageList={offer} />
-            <FlatDisplayComponent heading='New Arrivals' />
-            <Spacer height={20}/>
             <Category />
+            <Spacer height={20}/>
+            <FlatDisplayComponent heading='New Arrivals' />
         </>
     );
 }

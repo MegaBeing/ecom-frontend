@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 import { tempCatList } from '../../../../assets/data'
-import CategoryItem from './components/CategoryList'
+import CategoryItem from './components/CategoryItem'
 import { Link } from 'react-router-dom'
 const Div = styled.div`
     width: 100%;
     display: flex;
     direction: row;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
+    flex-direction: column;
 `
 const StyledLink = styled(Link)`
-    width: 45%;
-    height: 200px;
+    width: 90%;
+    height: 600px;
     text-decoration: none;
+    margin: 10px 0;
+    box-shadow: 0 0 10px gray;
+    border-radius: 10px;
 `
 export default function Category() {
 
