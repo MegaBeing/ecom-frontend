@@ -60,9 +60,14 @@ const Button = styled.div`
     color: white;
     }
 `
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 export default function Authenticate(){
     const [state, setState] = useState(true);
     return (
+        <>
+        <Spacer height={70}/>
         <Container>
             <StyledForm>
                 <ButtonContainerContainer>
@@ -83,5 +88,6 @@ export default function Authenticate(){
                 {state ? <Login /> : <Signup />}
             </StyledForm>
         </Container>
+        </>
     );
 }

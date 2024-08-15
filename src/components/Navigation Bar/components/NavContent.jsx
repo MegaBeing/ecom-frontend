@@ -11,7 +11,7 @@ const NavContent = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-
+  transition: width 0.2s ease-in-out;
   &.nav-content-enter{
     opacity: 0;
   }
@@ -28,22 +28,23 @@ const NavContent = styled.div`
   }
 `;
 
-const Heading = styled.h1`
+const Heading = styled.div`
   margin-left: 10px;
   font-weight: 100;
   color: black;
+  transition: font-size 0.2s ease-in-out;
 `;
 
-export default function NavCont({ search, setSearchState }) {
+export default function NavCont({ search, setSearchState ,visible}) {
   const isAuth = () => {
     const access_token = localStorage.getItem('access_token');
     if(!access_token) return false;
     return true;
   }
-  return (<NavContent className='nav-content'>
+  return (<NavContent className='nav-content' style={{width: visible ? '100%' : '90%'}}>
     <NavDrawer />
     <Link to='/' style={{textDecoration: 'none'}}>
-    <Heading>BatuaWala</Heading>
+    <Heading style = {{fontSize: visible ? '30px' : '10px'}}>BatuaWala</Heading>
     </Link>
     <Stack direction="row" spacing={1}>
       {isAuth() ? <Link to='/cart'>

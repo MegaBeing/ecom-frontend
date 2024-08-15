@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import AccountHeader from "./components/AccountHeader";
+import ProfileAddress from "./components/ProfileAddress";
 const Container = styled.div`
     display: flex;
     justify-content: start;
@@ -13,7 +14,10 @@ const Spacer = styled.div`
 export default function AccountPage() {
     return (
         <Container>
-            <Spacer height={50} /> 
+            <Spacer height={90} /> 
+            <AccountHeader />
+            <Spacer height={20} />
+            <ProfileAddress /> 
         </Container>
     );
 }

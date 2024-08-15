@@ -76,6 +76,9 @@ const AddToCartButtonContainer = styled.div`
     align-items:center;
     padding-bottom: 3%;
 `
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 export default function Product() {
     const { id } = useParams();
     const api_url = import.meta.env.VITE_API_URL;
@@ -95,6 +98,7 @@ export default function Product() {
     }
     return (
         <>
+            <Spacer height={70}/>
             <Corousel imageList={product.images} />
             <TitleContainer>
                 <NameCatContainer>

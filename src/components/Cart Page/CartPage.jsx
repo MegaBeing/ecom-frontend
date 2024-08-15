@@ -18,6 +18,9 @@ const ButtonContainer = styled.div`
     align-items:center;
     justify-content:center;
 `
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 export default function CartPage({isAuth}) {
     const api_url = import.meta.env.VITE_API_URL;
     const [cartList, setCartList] = useState([]);
@@ -45,6 +48,7 @@ export default function CartPage({isAuth}) {
     return (
         (isAuth && cartList.length !== 0) ? (
             <>
+                <Spacer height={70} />
                 <CartContainer>
                     {cartList.cart_items.map((ele) => (
                         <SingleCartItem
@@ -64,7 +68,10 @@ export default function CartPage({isAuth}) {
                 </ButtonContainer>
             </>
         ) : (
+            <>
+            <Spacer height={70} />
             <NoAuthCart />
+            </>
         )
     );
 }

@@ -32,7 +32,7 @@ export default function Home() {
         return <Loading />;
     return (
         <>
-            <Spacer height={10}/>
+            <Spacer height={70}/>
             <Corousel imageList={offer} />
             <Category />
             <Spacer height={20}/>

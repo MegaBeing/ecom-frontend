@@ -25,6 +25,9 @@ const PaginationWrapper = styled.div`
     justify-content:center;
 
 `
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 export default function ProductListPage() {
     const [products, setProductsState] = useState([]);
     const location = useLocation();
@@ -65,7 +68,8 @@ export default function ProductListPage() {
     }
 
     return (
-        <>
+        <>  
+            <Spacer height={70}/>
             <Container>
                 {products.map((ele) => (
                     <SingleProductDisplay

@@ -12,6 +12,9 @@ const PageContainer = styled.div`
     height: fit-content;
     display:block;
 `
+const Spacer = styled.div`
+    height: ${(props) => (props.height)}px;
+`
 
 export default function OrderListPage({ isAuth }) {
     const [loading, setLoading] = useState(true);
@@ -28,6 +31,8 @@ export default function OrderListPage({ isAuth }) {
     if(loading)
         return <Loading/>
     return (
+        <>
+        <Spacer height={85}/>
         <PageContainer>
             {tempCatList.map((ele) => <SingleOrder
                 key={ele.category}
@@ -38,6 +43,7 @@ export default function OrderListPage({ isAuth }) {
             />
             )}
         </PageContainer>
+        </>
     );
 }
 

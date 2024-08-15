@@ -11,15 +11,15 @@ const Container = styled.div`
     padding: 2%;
 `
 const Spacer = styled.div`
-    height: 10px;
+    height: ${(props) => (props.height)}px;
 `
 
 export default function OrderPage({isAuth}){
     return (<>
         <Container>
-            <Spacer />
+            <Spacer height={70}/>
             <Status status='delivered' />
-            <Spacer />
+            <Spacer height={10}/>
             <OrderInfo/>
         </Container>
     </>);

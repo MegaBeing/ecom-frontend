@@ -12,24 +12,25 @@ import Authenticate from './components/Query/Authenticate.jsx';
 import OrderListPage from './components/OrderList Page/OrderListPage.jsx';
 import OrderPage from './components/Order Page/OrderPage.jsx';
 import DesktopMessage from './components/DesktopMessage.jsx';
+import AccountPage from './components/Account Page/AccountPage.jsx';
 async function Refresh(refresh_token, api_url) {
   try {
     const body = JSON.stringify({ 'refresh': refresh_token });
     const response = await fetch(`${api_url}/user/refresh-token/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: body
+      body: body,
     });
 
     if (response.status === 200) {
       const data = await response.json();
       localStorage.setItem('access_token', data['access']);
       return true;
-    } else {
+    } else if(response.status === 401) {
       return false;
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return false;
   }
 }
@@ -48,12 +49,12 @@ async function CheckAuth(api_url) {
 
     if (response.status === 200) {
       return true;
-    } else {
+    } else if(response.status === 401) {
       const refresh_token = localStorage.getItem('refresh_token');
       return Refresh(refresh_token, api_url);
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return false;
   }
 }
@@ -87,7 +88,7 @@ function App() {
           <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
           <Route path='/rating-form' element={<h1>Rating Form</h1>} />
           <Route path='/custom-order' element={<h1>Custom Order</h1>} />
-          <Route path='/my-account' element={<h1>My Account</h1>} />
+          <Route path='/my-account' element={<AccountPage/>} />
         </Routes>
       </BrowserRouter>)}
       {isDesktopOrLaptop && 

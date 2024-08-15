@@ -13,9 +13,10 @@ const Navbar = styled.nav`
   height: 70px;
   background-color: #e6e6e6;
   box-shadow: 0 0 4px gray;
-  position: relative;
   overflow: hidden;
   border-radius: 0 0 20px 20px;
+  z-index: 100;
+  transition: top 0.2s ease-in-out;
 `;
 
 const SearchContainer = styled.div`
@@ -59,27 +60,44 @@ align-items: center;
 `
 
 export default function NavBar() {
-    const [search, setSearchState] = useState(false);
-    const searchContainerRef = useRef(null);
-    return (
-        <Navbar>
-            <CSSTransition in={!search} timeout={400} classNames='nav-content' unmountOnExit>
-                <NavCont search={search} setSearchState={setSearchState} />
-            </CSSTransition>
+  const [search, setSearchState] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const searchContainerRef = useRef(null);
+  useEffect(() => {
+    let prevScrollPos = window.scrollY;
 
-            <CSSTransition in={search} timeout={400} classNames="search" unmountOnExit>
-                <SearchContainer ref={searchContainerRef}>
-                    <IconButton onClick={() => setSearchState(!search)}>
-                        <CloseIcon/>
-                    </IconButton>
-                    <SearchTextContainer>
-                    <InputField componentName='search' searchState={search} />
-                    <IconButton color='primary'>
-                      <Search />
-                    </IconButton>
-                    </SearchTextContainer>
-                </SearchContainer>
-            </CSSTransition>
-        </Navbar>
-    );
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
+      if(search)
+        setSearchState(false);
+      prevScrollPos = currentScrollPos;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <Navbar style={{top: visible ? '0': '-70px'}}>
+      <CSSTransition in={!search} timeout={400} classNames='nav-content' unmountOnExit>
+        <NavCont search={search} setSearchState={setSearchState} visible={visible}/>
+      </CSSTransition>
+
+      <CSSTransition in={search} timeout={400} classNames="search" unmountOnExit>
+        <SearchContainer ref={searchContainerRef}>
+          <IconButton onClick={() => setSearchState(!search)}>
+            <CloseIcon />
+          </IconButton>
+          <SearchTextContainer>
+            <InputField componentName='search' searchState={search} />
+            <IconButton color='primary'>
+              <Search />
+            </IconButton>
+          </SearchTextContainer>
+        </SearchContainer>
+      </CSSTransition>
+    </Navbar>
+  );
 }
