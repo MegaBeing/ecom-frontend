@@ -5,6 +5,8 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
 import NavDrawer from './Drawer/Drawer.jsx';
 import { Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import BackButton from "./BackButton.jsx";
 const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
@@ -36,13 +38,15 @@ const Heading = styled.div`
 `;
 
 export default function NavCont({ search, setSearchState ,visible}) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const isAuth = () => {
     const access_token = localStorage.getItem('access_token');
     if(!access_token) return false;
     return true;
   }
   return (<NavContent className='nav-content' style={{width: visible ? '100%' : '90%'}}>
-    <NavDrawer />
+    {location.pathname === '/' ? <NavDrawer /> : <BackButton navigate={navigate}/>}
     <Link to='/' style={{textDecoration: 'none'}}>
     <Heading style = {{fontSize: visible ? '30px' : '10px'}}>BatuaWala</Heading>
     </Link>
