@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { IconButton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 const ItemContainer = styled.div`
 width:90%;
@@ -54,80 +55,57 @@ const ButtonContainer = styled.div`
     align-items:center;
     box-shadow: 0 2px 5px gray;
 `
-export default function SingleCartItem({ product, itemQuantity }) {
-    itemQuantity = parseInt(itemQuantity)
-    const [quantity, setQuantityState] = useState(itemQuantity);
-    const SubtractQuantity = async (product_id) => {
+export default function SingleCartItem({ product, itemQuantity, onQuantityChange }) {
+    const [quantity, setQuantityState] = useState(parseInt(itemQuantity));
+    const updateQuantity = async (action) => {
+        const newQuantity = action === 'add' ? quantity + 1 : Math.max(0, quantity - 1);
+        
         try {
-            const body = JSON.stringify({
-                'product_id':product_id
-            })
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/user/cart/remove-from-cart/`,
-                {
-                    method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-                    },
-                    body: body
-                })
-            if (response.status == 200) {
-                setQuantityState(Math.max(1, quantity - 1));
-            }
-            else {
-                throw new Error('Failed to remove item from cart');
-            }
-        }
-        catch (error) {
-            console.error('Error:', error);
-        }
+            const url = action === 'add' 
+                ? `${import.meta.env.VITE_API_URL}/user/cart/add-to-cart/`
+                : `${import.meta.env.VITE_API_URL}/user/cart/remove-from-cart/`;
+            
+            const method = action === 'add' ? 'POST' : 'DELETE';
+            
+            const response = await fetch(url, {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                },
+                body: JSON.stringify({ product_id: product.id })
+            });
 
-    }
-    const AddQuantity = async (product_id, itemQuan) => {
-        try {
-            const body = JSON.stringify({
-                'product_id':product_id,
-                'quantity':itemQuan
-            })
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/user/cart/add_to_cart/`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-                    },
-                    body:body
-
-                })
-            if (response.status == 200) {
-                setQuantityState(quantity + 1);
-            }
-            else {
-                throw new Error('Failed to add item to cart');
+            if (response.ok) {
+                setQuantityState(newQuantity);
+                onQuantityChange()
+                onQuantityChange && onQuantityChange(product.id, newQuantity);
+            } else {
+                throw new Error(`Failed to ${action} item ${action === 'remove' ? 'from' : 'to'} cart`);
             }
         } catch (error) {
-            console.error(error);
+            console.error('Error:', error);
+            // Here you could set some state to show an error message to the user
         }
+    };
 
-    }
+    const subtractQuantity = () => updateQuantity('remove');
+    const addQuantity = () => updateQuantity('add');
+
     return (
         <ItemContainer>
-            <Image src={product.images[0].image} />
+            <Image src={product.images && product.images[0] ? product.images[0].image : 'placeholder-image-url'} />
             <InfoButContainer>
                 <InfoContainer>
-                    <ItemName>
-                        {product.product_name}
-                    </ItemName>
-                    <PriceContainer>
-                        {`₹${product.price}`}
-                    </PriceContainer>
+                    <ItemName>{product.product_name}</ItemName>
+                    <PriceContainer>{`₹${product.price}`}</PriceContainer>
                 </InfoContainer>
                 <ButtonContainer>
-                    <IconButton onClick={() => SubtractQuantity(product.id)}>
+                    <IconButton onClick={subtractQuantity} disabled={quantity <= 0}>
                         <RemoveIcon />
                     </IconButton>
                     {quantity}
-                    <IconButton onClick={() => AddQuantity(product.id, quantity)}>
+                    <IconButton onClick={addQuantity}>
                         <AddIcon />
                     </IconButton>
                 </ButtonContainer>

@@ -21,7 +21,7 @@ const ButtonContainer = styled.div`
 const Spacer = styled.div`
     height: ${(props) => (props.height)}px;
 `
-export default function CartPage({isAuth}) {
+export default function CartPage({ isAuth }) {
     const api_url = import.meta.env.VITE_API_URL;
     const [cartList, setCartList] = useState([]);
     const cartData = async () => {
@@ -33,9 +33,11 @@ export default function CartPage({isAuth}) {
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                 }
             });
-            const data = await response.json();
-            // console.log(data[0]);
-            setCartList(data[0]);
+            if (response.ok) {
+                const data = await response.json();
+                console.log(data);
+                setCartList(data[0]);
+            }
         } catch (error) {
             console.error('Error:', error);
         }
@@ -46,7 +48,7 @@ export default function CartPage({isAuth}) {
     }, []);
 
     return (
-        (isAuth && cartList.length !== 0) ? (
+        (isAuth && cartList.length != 0 && cartList.cart_items.length != 0) ? (
             <>
                 <Spacer height={70} />
                 <CartContainer>
@@ -55,6 +57,7 @@ export default function CartPage({isAuth}) {
                             key={ele.id}
                             itemQuantity={ele.quantity}
                             product={ele.product}
+                            onQuantityChange={cartData}
                         />
                     ))}
                 </CartContainer>
@@ -69,8 +72,8 @@ export default function CartPage({isAuth}) {
             </>
         ) : (
             <>
-            <Spacer height={70} />
-            <NoAuthCart />
+                <Spacer height={70} />
+                <NoAuthCart isAuth={isAuth} />
             </>
         )
     );
