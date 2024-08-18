@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { IconButton } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';import { useState } from 'react';
 const ItemContainer = styled.div`
 width:90%;
 padding: 2%;
@@ -59,14 +58,14 @@ export default function SingleCartItem({ product, itemQuantity, onQuantityChange
     const [quantity, setQuantityState] = useState(parseInt(itemQuantity));
     const updateQuantity = async (action) => {
         const newQuantity = action === 'add' ? quantity + 1 : Math.max(0, quantity - 1);
-        
+
         try {
-            const url = action === 'add' 
+            const url = action === 'add'
                 ? `${import.meta.env.VITE_API_URL}/user/cart/add-to-cart/`
                 : `${import.meta.env.VITE_API_URL}/user/cart/remove-from-cart/`;
-            
+
             const method = action === 'add' ? 'POST' : 'DELETE';
-            
+
             const response = await fetch(url, {
                 method,
                 headers: {
@@ -102,7 +101,7 @@ export default function SingleCartItem({ product, itemQuantity, onQuantityChange
                 </InfoContainer>
                 <ButtonContainer>
                     <IconButton onClick={subtractQuantity} disabled={quantity <= 0}>
-                        <RemoveIcon />
+                        {quantity == 1 ? <DeleteOutlineIcon /> : <RemoveIcon />}
                     </IconButton>
                     {quantity}
                     <IconButton onClick={addQuantity}>

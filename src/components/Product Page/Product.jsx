@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { tempCatList } from '../../assets/data';
 import Corousel from '../Home Page/components/Corousel';
 import Rating from '@mui/material/Rating';
-import { Button, stepButtonClasses } from '@mui/material';
+import { Button } from '@mui/material';
 import Collapsible from './components/Collapsible';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 const TitleContainer = styled.div`
     width: 100%;
     display: flex;
@@ -83,22 +83,44 @@ export default function Product() {
     const { id } = useParams();
     const api_url = import.meta.env.VITE_API_URL;
     const [product, setProductsState] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
         productData();
     }, [id])
-    const productData = async () => {
-        try{
-        const response = await fetch(`${api_url}/products/${id}`)
-        const data = await response.json();
-        setProductsState(data);
+    const addToCart = async () => {
+        try {
+            console.log(id);
+            const response = await fetch(`${api_url}/user/cart/add-to-cart/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                body: JSON.stringify({
+                    'product_id': id,
+                })
+            })
+            if (response.ok) {
+                navigate('/cart');
+            }
         }
-        catch(error){
+        catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    const productData = async () => {
+        try {
+            const response = await fetch(`${api_url}/products/${id}`)
+            const data = await response.json();
+            setProductsState(data);
+        }
+        catch (error) {
             console.error('Error:', error);
         }
     }
     return (
         <>
-            <Spacer height={70}/>
+            <Spacer height={70} />
             <Corousel imageList={product.images} />
             <TitleContainer>
                 <NameCatContainer>
@@ -125,7 +147,11 @@ export default function Product() {
             </SecondContainer>
             <Collapsible description={product.description} />
             <AddToCartButtonContainer>
-                <Button sx={{width:'90%',borderRadius:'20px',backgroundColor:'gray'}} variant='contained' color='primary'>Add To Cart</Button>
+                <Button
+                    sx={{ width: '90%', borderRadius: '20px', backgroundColor: 'gray' }}
+                    variant='contained'
+                    color='primary'
+                    onClick={() => addToCart()}>Add To Cart</Button>
             </AddToCartButtonContainer>
         </>
     );
