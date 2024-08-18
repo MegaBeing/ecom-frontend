@@ -76,13 +76,26 @@ const AddToCartButtonContainer = styled.div`
     align-items:center;
     padding-bottom: 3%;
 `
+const AddedToCart = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    width: 90%;
+    border-radius: 20px;
+    color: green;
+    background-color: transparent;
+    border: 1px solid green;
+`
 const Spacer = styled.div`
     height: ${(props) => (props.height)}px;
 `
+
 export default function Product() {
     const { id } = useParams();
     const api_url = import.meta.env.VITE_API_URL;
     const [product, setProductsState] = useState({});
+    const [addedToCart, setCartState] = useState(false);
     const navigate = useNavigate();
     useEffect(() => {
         productData();
@@ -101,7 +114,8 @@ export default function Product() {
                 })
             })
             if (response.ok) {
-                navigate('/cart');
+                setCartState(true)
+                // navigate('/cart');
             }
         }
         catch (error) {
@@ -147,11 +161,12 @@ export default function Product() {
             </SecondContainer>
             <Collapsible description={product.description} />
             <AddToCartButtonContainer>
-                <Button
-                    sx={{ width: '90%', borderRadius: '20px', backgroundColor: 'gray' }}
-                    variant='contained'
-                    color='primary'
-                    onClick={() => addToCart()}>Add To Cart</Button>
+                {addedToCart ? (<AddedToCart>Added to Cart</AddedToCart> ) :
+                    (<Button
+                        sx={{ width: '90%', borderRadius: '20px', backgroundColor: 'gray' }}
+                        variant='contained'
+                        color='primary'
+                        onClick={() => addToCart()}>Add To Cart</Button>)}
             </AddToCartButtonContainer>
         </>
     );
