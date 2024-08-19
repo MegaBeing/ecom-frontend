@@ -20,7 +20,6 @@ const ComponentWrapper = styled.div`
     border-radius: 10px;
 `;
 export default function FlatDisplayComponent({heading}) {
-
     return (
         <Div>
             <h1>{heading}</h1>
