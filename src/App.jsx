@@ -3,16 +3,16 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
 // Page Imports
-import Home from './components/Home Page/HomePage';
-import NavBar from './components/Navigation Bar/NavBar';
-import ProductListPage from './components/ProductList Page/ProductListPage';
-import CartPage from './components/Cart Page/CartPage';
-import Product from './components/Product Page/Product';
+import Home from './components/Home_Page/HomePage';
+import NavBar from './components/Navigation_Bar/NavBar';
+import ProductListPage from './components/ProductList_Page/ProductListPage';
+import CartPage from './components/Cart_Page/CartPage';
+import Product from './components/Product_Page/Product';
 import Authenticate from './components/Query/Authenticate.jsx';
-import OrderListPage from './components/OrderList Page/OrderListPage.jsx';
-import OrderPage from './components/Order Page/OrderPage.jsx';
+import OrderListPage from './components/OrderList_Page/OrderListPage.jsx';
+import OrderPage from './components/Order_Page/OrderPage.jsx';
 import DesktopMessage from './components/DesktopMessage.jsx';
-import AccountPage from './components/Account Page/AccountPage.jsx';
+import AccountPage from './components/Account_Page/AccountPage.jsx';
 async function Refresh(refresh_token, api_url) {
   try {
     const body = JSON.stringify({ 'refresh': refresh_token });

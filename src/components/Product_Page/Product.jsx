@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Corousel from '../Home Page/components/Corousel';
+import Corousel from '../Home_Page/components/Corousel';
 import Rating from '@mui/material/Rating';
 import { Button } from '@mui/material';
 import Collapsible from './components/Collapsible';
