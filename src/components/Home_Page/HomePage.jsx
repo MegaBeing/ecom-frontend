@@ -15,14 +15,17 @@ const Spacer = styled.div`
 export default function Home() {
     const [offer, setOfferState] = useState(null);
     const [loading, setLoading] = useState(true);
-
+    const [newArrival, setNewArrival] = useState(null);
     useEffect(() => {
-        const offerData = async () => {
+        const Data = async () => {
             try {
                 const url = import.meta.env.VITE_API_URL;
-                const response = await fetch(`${url}/offers/images`, { method: 'GET' });
-                const data = await response.json();
-                setOfferState(data);
+                const car_response = await fetch(`${url}/offers/images`, { method: 'GET' }); // Response for carousel
+                const arr_response = await fetch(`${url}/products/new-arrivals`, { method: 'GET' });
+                const car_data = await car_response.json();
+                const arr_data = await arr_response.json();
+                setOfferState(car_data);
+                setNewArrival(arr_data);
             } catch (error) {
                 console.error(error);
             }
@@ -30,7 +33,7 @@ export default function Home() {
                 setLoading(false)
             }
         }
-        offerData();
+        Data();
     }, []);
 
     const Reviews = ReviewItems.map(
@@ -38,7 +41,7 @@ export default function Home() {
             <SingleReview key={index} username={ele.username}  comment={ele.comment} imageUrl={ele.imageUrl} rating={ele.rating}/> 
         )
     )
-    console.log(Reviews)
+    // console.log(Reviews)
     if (loading)
         return <Loading />;
     return (
@@ -47,7 +50,7 @@ export default function Home() {
             <Corousel imageList={offer} />
             <Category />
             <Spacer height={20}/>
-            <FlatDisplayComponent heading='New Arrivals' />
+            <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/>
             <Spacer height={20}/>
             <CustomerReviewList items={Reviews} />
         </>

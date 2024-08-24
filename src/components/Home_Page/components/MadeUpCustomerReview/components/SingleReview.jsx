@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Rating from '@mui/material/Rating';
 const Container = styled.div`
     border-radius: 10px 10px 0 0;
-    box-shadow: 0 2px 3px #;
+    box-shadow: 0 2px 3px #cfcfcf;
     width: 400px;
     height: 450px;
     margin-bottom:40px;

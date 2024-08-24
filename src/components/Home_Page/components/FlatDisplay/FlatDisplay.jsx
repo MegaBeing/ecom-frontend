@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import { tempCatList } from "../../../../assets/data";
+import { Link } from "react-router-dom";
 import SingleFlatDisplayComponent from "./components/SingleFlatDisplayComponent";
+const ComponentLink = styled(Link)`
+    width: 100%;
+    text-decoration: none;
+    color:black;
+`
 const Div = styled.div`
     margin-top: 50px;
-    width: 100%;
     display: flex;
     align-items:center;
     justify-content:center;
@@ -19,16 +23,20 @@ const ComponentWrapper = styled.div`
     gap:10px;
     border-radius: 10px;
 `;
-export default function FlatDisplayComponent({heading}) {
+export default function FlatDisplayComponent({ heading, valueList }) {
+    const url = import.meta.env.VITE_API_URL;
     return (
         <Div>
             <h1>{heading}</h1>
             <ComponentWrapper>
-                {tempCatList.map((ele, index) => (<SingleFlatDisplayComponent
-                    key={index}
-                    imageUrl={ele.imageUrl}
-                    imageCaption={ele.category}
-                    Price='₹ 1000' />
+                {valueList.map((ele) => (
+                    <ComponentLink to={`/product/${ele.id}`}>
+                        <SingleFlatDisplayComponent
+                            key={ele.id}
+                            imageUrl={`${url}/${ele.images[0].image}`}
+                            imageCaption={ele.product_name}
+                            Price={`₹ ${ele.price}`} />
+                    </ComponentLink>
                 ))}
             </ComponentWrapper>
         </Div>

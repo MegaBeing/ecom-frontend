@@ -21,20 +21,26 @@ const Image = styled.img`
   margin: 2%;
   border-radius: 30px;
   margin-left:15px;
+  border: 1px solid #cfcdcc;
 `
 const Div = styled.div`
 text-align:start;
 `
-export default function SingleFlatDisplayComponent({imageUrl,imageCaption,Price}){
-  return(
-    <Base sx={{borderRadius: '30px'}}>
-    <ComponentWrapper>
-      <Image src={imageUrl} /> 
-      <Div>
-        <h2>{imageCaption}</h2>
-        {Price}
-      </Div>
-    </ComponentWrapper>
+const ImageCaption = styled.div`
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
+`
+export default function SingleFlatDisplayComponent({ imageUrl, imageCaption, Price }) {
+  return (
+    <Base sx={{ borderRadius: '30px' }}>
+      <ComponentWrapper>
+        <Image src={imageUrl} />
+        <Div>
+          <ImageCaption>{imageCaption}</ImageCaption>
+          {Price}
+        </Div>
+      </ComponentWrapper>
     </Base>
   )
 }
