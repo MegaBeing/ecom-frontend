@@ -1,10 +1,9 @@
 import styled from "styled-components";
-import Rating from '@mui/material/Rating';
 const Container = styled.div`
     border-radius: 10px 10px 0 0;
     box-shadow: 0 2px 3px #cfcfcf;
     width: 400px;
-    height: 450px;
+    height: fit-content;
     margin-bottom:40px;
     display: flex;
     padding: 0;
@@ -20,8 +19,9 @@ const Image = styled.img`
     object-fit: cover;
 `
 const Description = styled.div`
+    background-image: linear-gradient(45deg,#505c4e,#747873);
     padding:2%;
-    height:200px;
+    height: 50px;
     width: 100%;
     display:flex;
     flex-direction:column;
@@ -32,15 +32,13 @@ const TitleContainer = styled.div`
     width: 100%;
     display:flex;
     flex-direction:row;
-    justify-content:space-between;
+    justify-content:center;
     align-items:center;
 `
 const Username = styled.div`
     font-size: 22px;
+    color: white;
     font-weight: 400;
-`
-const Comment = styled.div`
-    margin-top: 10px;
 `
 
 export default function SingleReview({rating, comment, imageUrl, username}){
@@ -52,11 +50,7 @@ export default function SingleReview({rating, comment, imageUrl, username}){
                 <Username>
                     {username}
                 </Username>
-                <Rating name="read-only" value={Math.round(rating)} readOnly />
                 </TitleContainer>
-                <Comment>
-                    " {comment} "
-                </Comment>
             </Description>
         </Container>
     )
