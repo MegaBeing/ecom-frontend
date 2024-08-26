@@ -13,6 +13,7 @@ import OrderListPage from './components/OrderList_Page/OrderListPage.jsx';
 import OrderPage from './components/Order_Page/OrderPage.jsx';
 import DesktopMessage from './components/DesktopMessage.jsx';
 import AccountPage from './components/Account_Page/AccountPage.jsx';
+import OfferPage from './components/Offer_Page/OfferPage.jsx';
 async function Refresh(refresh_token, api_url) {
   try {
     const body = JSON.stringify({ 'refresh': refresh_token });
@@ -89,6 +90,7 @@ function App() {
           <Route path='/rating-form' element={<h1>Rating Form</h1>} />
           <Route path='/custom-order' element={<h1>Custom Order</h1>} />
           <Route path='/my-account' element={<AccountPage/>} />
+          <Route path='/offer/:id' element={<OfferPage/>} /> 
         </Routes>
       </BrowserRouter>)}
       {isDesktopOrLaptop && 

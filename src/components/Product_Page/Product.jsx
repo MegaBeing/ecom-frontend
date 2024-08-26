@@ -150,7 +150,7 @@ export default function Product() {
             <SecondContainer>
                 <RatingContainer>
                     <Rating name="read-only" value={Math.round(Product.rating)} readOnly />
-                    {product.rating}
+                    ({product.rating})
                 </RatingContainer>
                 <DiscountContainer>
                     <PreviousPriceContainer>

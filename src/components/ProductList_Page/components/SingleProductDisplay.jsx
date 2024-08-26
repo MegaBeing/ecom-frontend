@@ -65,8 +65,10 @@ color: green;
 `
 export default function SingleProductDisplay({ id,imageUrl, caption, price, previousPrice }) {
     let priceInt = parseInt(price);
+    const api_url = import.meta.env.VITE_API_URL;
     let previousPriceInt = parseInt(previousPrice);
     let discount = Math.round((previousPriceInt - priceInt) / previousPriceInt * 100);
+    const image_url = imageUrl[0] != "h" ? `${api_url}/${imageUrl}` : imageUrl;
     return (
         <StyledLink to={`/product/${id}`}>
             <ButtonBase sx={{
@@ -74,7 +76,7 @@ export default function SingleProductDisplay({ id,imageUrl, caption, price, prev
                 // border:'1px solid black'
             }}>
                 <Container>
-                    <Image src={imageUrl} alt='Product Image' />
+                    <Image src={image_url} alt='Product Image' />
                     <Caption>{caption}</Caption>
                     <NumContainer>
                         <PriceContainer>

@@ -4,16 +4,9 @@ import SingleProductDisplay from './components/SingleProductDisplay';
 import Pagination from '@mui/material/Pagination';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect,useState } from 'react';
+import ProductContainer from './components/ProductContainer';
 
-const Container = styled.div`
-    width: 100%;
-    height: fit-content;
-    display:flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:space-around;
-    align-items:center;
-`
+
 const Message = styled.div`
     margin:10px;
     color:#a84c32;
@@ -70,17 +63,7 @@ export default function ProductListPage() {
     return (
         <>  
             <Spacer height={70}/>
-            <Container>
-                {products.map((ele) => (
-                    <SingleProductDisplay
-                        key={ele.id}
-                        id = {ele.id}
-                        imageUrl={`${api_url}/${ele.images[0].image}`}
-                        caption={ele.product_name}
-                        price={ele.price}
-                        previousPrice={ele.previous_price} />
-                ))}
-            </Container>
+            <ProductContainer products = {products} api_url={api_url}/>
             <PaginationWrapper>
                 <Pagination count={10} color="primary" />
             </PaginationWrapper>
