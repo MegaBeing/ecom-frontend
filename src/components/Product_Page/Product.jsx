@@ -135,7 +135,7 @@ export default function Product() {
     return (
         <>
             <Spacer height={70} />
-            <Corousel imageList={product.images} />
+            <Corousel imageList={product.images} isOffer={false}/>
             <TitleContainer>
                 <NameCatContainer>
                     <ProductName>

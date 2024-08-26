@@ -1,7 +1,6 @@
-import Bag1 from '/bags-2-1516379.jpg'
-import Bag2 from '/bags2.jpg'
-import Bag3 from '/bags3.jpg'
-import Bag4 from '/bags4.jpg'
+import Bag1 from '/1.png'
+import Bag2 from '/2.png'
+import Bag3 from '/3.png'
 export const tempCatList = [
     {
         category:'Clutch Bag',
@@ -15,8 +14,4 @@ export const tempCatList = [
         category:'Batua bag',
         imageUrl:Bag3,
     },
-    {
-        category:'Bridal bag',
-        imageUrl:Bag4,
-    }
 ]

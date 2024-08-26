@@ -33,69 +33,69 @@ export default function OfferPage() {
     }]
     const productList = [
         {
-            "id": 1,
-            "product_name": "Swickon Piglett Clutch",
-            "product_category": "Clutch bag",
-            "price": 1999,
-            "description": "this is the best clutch in the industry",
-            "previous_price": 3999,
-            "dimensions": "12.0x24.0x12.0",
-            "color": "gray",
-            "images": [
-                {
-                    "id": 1,
-                    "image": "http://127.0.0.1:8000/media/product_images/bags1_MuI3JPv.jpg"
-                }
-            ]
-        },
-        {
-            "id": 2,
-            "product_name": "Ananya Pandey bag",
-            "product_category": "Bridal bag",
-            "price": 3999,
-            "description": "this is the best bridal bag for consumers weddings",
-            "previous_price": 5999,
-            "dimensions": "12.0x25.0x23.0",
-            "color": "white",
-            "images": [
-                {
-                    "id": 2,
-                    "image": "http://127.0.0.1:8000/media/product_images/BridalBag1_prjFSzl.jpg"
-                }
-            ]
-        },
-        {
-            "id": 3,
-            "product_name": "Ravi ki Polti",
+            "id": 5,
+            "product_name": "Potli",
             "product_category": "Potlis",
-            "price": 799,
-            "description": "Ravi ki best material poltli",
-            "previous_price": 1299,
-            "dimensions": "12.0x24.0x12.0",
-            "color": "red",
+            "price": 1299,
+            "description": "A potli bag is a traditional Indian drawstring pouch, often made from rich fabrics like silk, velvet, or brocade and embellished with intricate embroidery, beads, or mirror work. These bags are typically small and circular, with a string closure that tightens at the top. Historically used to carry small valuables, potli bags have become popular as stylish accessories for festive occasions, weddings, and parties. Their timeless charm lies in their vibrant designs and cultural significance",
+            "previous_price": 5999,
+            "dimensions": "12.0x12.0x12.0",
+            "color": "Gray",
             "images": [
                 {
-                    "id": 3,
-                    "image": "http://127.0.0.1:8000/media/product_images/potli1_AP6Yfhd.png"
+                    "id": 5,
+                    "image": "http://127.0.0.1:8000/media/product_images/Potli_1.jpeg"
                 }
             ]
         },
         {
-            "id": 4,
-            "product_name": "Swickon Piglett Clutch",
-            "product_category": "Clutch bag",
-            "price": 1200,
-            "description": "this is second",
-            "previous_price": 5000,
-            "dimensions": "12.0x21.0x12.0",
+            "id": 6,
+            "product_name": "Potli",
+            "product_category": "Potlis",
+            "price": 2999,
+            "description": "A potli bag is a traditional Indian drawstring pouch, often made from rich fabrics like silk, velvet, or brocade and embellished with intricate embroidery, beads, or mirror work. These bags are typically small and circular, with a string closure that tightens at the top. Historically used to carry small valuables, potli bags have become popular as stylish accessories for festive occasions, weddings, and parties. Their timeless charm lies in their vibrant designs and cultural significance",
+            "previous_price": 4999,
+            "dimensions": "12.0x12.0x12.0",
+            "color": "blue",
+            "images": [
+                {
+                    "id": 6,
+                    "image": "http://127.0.0.1:8000/media/product_images/Potli_4.jpeg"
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "product_name": "Potli",
+            "product_category": "Potlis",
+            "price": 3999,
+            "description": "A potli bag is a traditional Indian drawstring pouch, often made from rich fabrics like silk, velvet, or brocade and embellished with intricate embroidery, beads, or mirror work. These bags are typically small and circular, with a string closure that tightens at the top. Historically used to carry small valuables, potli bags have become popular as stylish accessories for festive occasions, weddings, and parties. Their timeless charm lies in their vibrant designs and cultural significance",
+            "previous_price": 7999,
+            "dimensions": "12.0x12.0x12.0",
+            "color": "multi",
+            "images": [
+                {
+                    "id": 7,
+                    "image": "http://127.0.0.1:8000/media/product_images/Potli_2.jpeg"
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "product_name": "Potli",
+            "product_category": "Potlis",
+            "price": 1599,
+            "description": "A potli bag is a traditional Indian drawstring pouch, often made from rich fabrics like silk, velvet, or brocade and embellished with intricate embroidery, beads, or mirror work. These bags are typically small and circular, with a string closure that tightens at the top. Historically used to carry small valuables, potli bags have become popular as stylish accessories for festive occasions, weddings, and parties. Their timeless charm lies in their vibrant designs and cultural significance",
+            "previous_price": 3999,
+            "dimensions": "12.0x12.0x12.0",
             "color": "red",
             "images": [
                 {
-                    "id": 4,
-                    "image": "http://127.0.0.1:8000/media/product_images/BridalBag1_dg3Nl0F.jpg"
+                    "id": 8,
+                    "image": "http://127.0.0.1:8000/media/product_images/Popli_3.jpeg"
                 }
             ]
-        }
+        },
     ]
     return (
         <>

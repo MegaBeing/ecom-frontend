@@ -12,7 +12,7 @@ const Image = styled.img`
   object-fit: cover;
 `;
 
-export default function Corousel({ imageList }) {
+export default function Corousel({ imageList , isOffer}) {
   const navigate = useNavigate();
   if (!imageList) return null;
 
@@ -23,8 +23,8 @@ export default function Corousel({ imageList }) {
           style={{ borderRadius: '40px' }}
           key={value.id}
         >
-          <Image src={value.image} alt="Slide" onClick={() => navigate(`/offer/${value.id}`)
-          } />
+          { isOffer && <Image src={value.image} alt="Slide" onClick={() => navigate(`/offer/${value.id}`)} />}
+          { !isOffer && <Image src={value.image} alt="Slide"/>}
         </Carousel.Item>
       ))}
     </Carousel>

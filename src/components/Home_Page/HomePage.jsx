@@ -60,7 +60,7 @@ export default function Home() {
     return (
         <>
             <Spacer height={70}/>
-            <Corousel imageList={offer} />
+            <Corousel imageList={offer} isOffer={true}/>
             <Category />
             <Spacer height={20}/>
             {/* <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/> */}
