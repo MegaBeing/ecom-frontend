@@ -104,10 +104,9 @@ export default function OfferPage() {
             <PriceFilter priceList={['500', '1000', '2000']} />
             <Spacer height={10} />
             <ProductContainer products={productList}/>
-            <Spacer height={10} />
             <ButtonContainer>
                 <Button variant="outlined">
-                    load more
+                    more
                 </Button>
             </ButtonContainer>
         </>

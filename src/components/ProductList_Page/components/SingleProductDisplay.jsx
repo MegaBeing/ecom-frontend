@@ -9,54 +9,66 @@ const StyledLink = styled(Link)`
 `
 const Container = styled.div`
     width: 200px;
-    height: 250px;
+    height: 275px;
     display:flex;
     flex-direction:column;
     justify-content:start;
-    align-items:start;
-    padding:0 2%;
+    align-items:flex-start;
+    padding:0;
     border-radius: 10px;
-    margin: 10px 5px;
 `
 const Image = styled.img`
-    width: 200px;
-    height: 150px;
+    width: 100%;
+    height: 200px;
     object-fit:cover;
-    border-radius: 30px;
-    box-shadow: 0 0 10px gray;
+    border-radius: 30px 30px 0 0 ;
+    border: 1px solid #d9dadb;
 `
 
 const Caption = styled.h3`
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     font-weight: 300;
     margin:0;
-    font-size: 22px;
+    font-size: 18px;
     margin-top:10px;
-    margin-left: 15px;
+    margin-left: 2px;
+
 `
 
 const NumContainer = styled.div`
-width: 80%;
-margin-left: 20px;
-display:flex;
-flex-direction:row;
-justify-content: space-between;
-align-items: end;
+    width: 80%;
+    margin-left: 2px;
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: end;
 
 `
 
 const PriceContainer = styled.div`
-display:flex;
-flex-direction:row;
-justify-content: start;
-align-items:end;
-font-size: 15px;
-font-weight: 100;
+    display:flex;
+    flex-direction:row;
+    justify-content: start;
+    align-items:end;
+    font-size: 15px;
+    font-weight: 100;
 `
 
 const PreviousPrice = styled.span`
     margin-left: 3px;
     font-size: 10px;
-    text-decoration: line-through;
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        border-top: 1px solid currentColor;
+        width: 100%;
+        top: 50%;
+        left: 0;
+    }
 `
 
 const Discount = styled.div`
