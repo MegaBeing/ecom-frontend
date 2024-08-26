@@ -1,29 +1,42 @@
 // imported components
 import Corousel from "./components/Corousel";
 import Category from "./components/Category/Category";
-import FlatDisplayComponent from "./components/FlatDisplay/FlatDisplay";
 import Loading from "../Loading";
 import CustomerReviewList from "./components/MadeUpCustomerReview/CustomerReviewList";
 import { ReviewItems } from "./components/MadeUpCustomerReview/Data/data";
 import SingleReview from "./components/MadeUpCustomerReview/components/SingleReview";
+import HProductList from "./components/HProductList/HProductList";
 // imported hooks or libraries
 import { useEffect, useState } from "react";
 import styled from 'styled-components'
+import { Button } from "@mui/material";
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 const Spacer = styled.div`
     height: ${(props) => (props.height)}px;
 `
+const HelpButton = styled.div`
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+`
+const Heading = styled.div`
+    font-size: 32px;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin-bottom: 15px;
+`
+
 export default function Home() {
     const [offer, setOfferState] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [newArrival, setNewArrival] = useState(null);
     useEffect(() => {
         const Data = async () => {
             try {
                 const url = import.meta.env.VITE_API_URL;
                 const car_response = await fetch(`${url}/offers/images`, { method: 'GET' }); // Response for carousel
-                const arr_response = await fetch(`${url}/products/new-arrivals`, { method: 'GET' });
                 const car_data = await car_response.json();
-                const arr_data = await arr_response.json();
                 setOfferState(car_data);
                 setNewArrival(arr_data);
             } catch (error) {
@@ -50,9 +63,17 @@ export default function Home() {
             <Corousel imageList={offer} />
             <Category />
             <Spacer height={20}/>
-            <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/>
+            {/* <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/> */}
             <Spacer height={20}/>
+            <HProductList title='New Arrivals'/>
+            <Spacer height={20}/>
+            <Heading>Wall Of Fame</Heading>
             <CustomerReviewList items={Reviews} />
+            <Spacer height={20}/>
+            <HProductList title='Best Sellers'/>
+            <HelpButton>
+                <Button sx={{borderRadius: '15px'}}variant='contained'> help ?</Button>
+            </HelpButton>
         </>
     );
 }

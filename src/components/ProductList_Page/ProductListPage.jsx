@@ -62,7 +62,7 @@ export default function ProductListPage() {
 
     return (
         <>  
-            <Spacer height={70}/>
+            <Spacer height={75}/>
             <ProductContainer products = {products} api_url={api_url}/>
             <PaginationWrapper>
                 <Pagination count={10} color="primary" />
