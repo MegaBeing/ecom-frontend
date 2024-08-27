@@ -32,24 +32,34 @@ export default function ProductListPage() {
     }, [location.search])
     const productData = async () => {
         try {
+            let isFilter = false;
             let url = `${api_url}/products/filter?`;
             if (keys.includes('search')) {
                 url += `search=${searchParams.get('search')}&`;
+                isFilter = true;
             }
             if (keys.includes('category')) {
                 url += `category=${searchParams.get('category')}&`;
+                isFilter = true;
             }
             if (keys.includes('max_value')) {
                 url += `max_value=${searchParams.get('max_value')}&`;
+                isFilter = true;
             }
             if (keys.includes('min_value')) {
                 url += `min_value=${searchParams.get('min_value')}&`;
+                isFilter = true;
             }
             if (keys.includes('color')) {
                 url += `color=${searchParams.get('color')}`;
+                isFilter = true;
             }
             if (url.endsWith('&')) {
                 url = url.slice(0, -1);
+            }
+            if(!isFilter)
+            {
+                url = `${api_url}/products/`
             }
             const response = await fetch(url);
             const data = await response.json();

@@ -2,6 +2,10 @@ import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
+import styled from 'styled-components';
+const Spacer = styled.div`
+  height: ${props => props.height}px;
+`
 // Page Imports
 import Home from './components/Home_Page/HomePage';
 import NavBar from './components/Navigation_Bar/NavBar';
@@ -14,6 +18,8 @@ import OrderPage from './components/Order_Page/OrderPage.jsx';
 import DesktopMessage from './components/DesktopMessage.jsx';
 import AccountPage from './components/Account_Page/AccountPage.jsx';
 import OfferPage from './components/Offer_Page/OfferPage.jsx';
+import Footer from './components/Footer/Footer.jsx';
+
 async function Refresh(refresh_token, api_url) {
   try {
     const body = JSON.stringify({ 'refresh': refresh_token });
@@ -27,7 +33,7 @@ async function Refresh(refresh_token, api_url) {
       const data = await response.json();
       localStorage.setItem('access_token', data['access']);
       return true;
-    } else if(response.status === 401) {
+    } else if (response.status === 401) {
       return false;
     }
   } catch (error) {
@@ -50,7 +56,7 @@ async function CheckAuth(api_url) {
 
     if (response.status === 200) {
       return true;
-    } else if(response.status === 401) {
+    } else if (response.status === 401) {
       const refresh_token = localStorage.getItem('refresh_token');
       return Refresh(refresh_token, api_url);
     }
@@ -87,14 +93,15 @@ function App() {
           <Route path='/auth' element={<Authenticate setIsAuth={setIsAuth} />} />
           <Route path='/my-orders' element={<OrderListPage isAuth={isAuth} />} />
           <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
-          <Route path='/rating-form' element={<h1>Rating Form</h1>} />
-          <Route path='/custom-order' element={<h1>Custom Order</h1>} />
-          <Route path='/my-account' element={<AccountPage/>} />
-          <Route path='/offer/:id' element={<OfferPage/>} /> 
+          {/* <Route path='/rating-form' element={<h1>Rating Form</h1>} /> */}
+          <Route path='/my-account' element={<AccountPage />} />
+          <Route path='/offer/:id' element={<OfferPage />} />
         </Routes>
+        <Spacer height = {30}/>
+        <Footer />
       </BrowserRouter>)}
-      {isDesktopOrLaptop && 
-        <DesktopMessage/>
+      {isDesktopOrLaptop &&
+        <DesktopMessage />
       }
     </>
   );
