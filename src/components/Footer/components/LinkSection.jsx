@@ -6,12 +6,13 @@ const SectionContainer = styled.div`
     justify-content: flex-start;
     align-items: flex-start;
     margin-left: 20px;
-    margin-top: 10px;
+    margin-top: 30px;
 
 `
 const Title = styled.div`
-    font-size: 36px;
+    font-size: 25px;
     font-weight: 400;
+    margin-bottom: 5px;
     color: #ffffff;
     text-transform: uppercase;
 `
@@ -22,11 +23,10 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: #cacaca;
     /* text-decoration:underline; */
-    margin-bottom: 5px;
-    margin-left: 5px;
+    margin-left: 10px;
 `
 
-export default function Section({title, linkList}){
+export default function LinkSection({title, linkList}){
     return(
         <SectionContainer>
             <Title>

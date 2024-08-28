@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import Section from "./components/Section";
-import sectionData from "./data/data";
+import LinkSection from "./components/LinkSection";
+import {sectionData, descriptionData }from "./data/data";
+import DescriptionSection from "./components/DescriptionSection";
 const Container = styled.div`
-    background-image: linear-gradient(80deg, #646464 , #c0c0c0);
+    background-image: linear-gradient(80deg, #6c8b9a ,  #2e5060);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -14,18 +15,14 @@ const Container = styled.div`
     /* height: 500px; */
     border-radius: 30px 30px 0 0 ;
 `
-const AboutTitle = styled.div`
-    font-size: 32px;
-`
-const About = () => {
-    return
-}
+
 export default function Footer({ position, marginTop }) {
 
     return (
         <Container position={position} marginTop={marginTop}>
+            <DescriptionSection title = {descriptionData.title} description={descriptionData.description}/>
             {sectionData.map((ele, index) => (
-                <Section key={index} title={ele.title} linkList={ele.linkList} />
+                <LinkSection key={index} title={ele.title} linkList={ele.linkList} />
             ))}
         </Container>
     );
