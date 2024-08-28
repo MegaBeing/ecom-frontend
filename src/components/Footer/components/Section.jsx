@@ -12,7 +12,7 @@ const SectionContainer = styled.div`
 const Title = styled.div`
     font-size: 36px;
     font-weight: 400;
-    color: white;
+    color: #ffffff;
     text-transform: uppercase;
 `
 const StyledLink = styled(Link)`
@@ -20,8 +20,8 @@ const StyledLink = styled(Link)`
     font-size: 20px;
     position: relative;
     text-decoration: none;
-    color: white;
-    text-decoration:underline;
+    color: #cacaca;
+    /* text-decoration:underline; */
     margin-bottom: 5px;
     margin-left: 5px;
 `

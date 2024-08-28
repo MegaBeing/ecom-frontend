@@ -6,11 +6,16 @@ import CustomerReviewList from "./components/MadeUpCustomerReview/CustomerReview
 import { ReviewItems } from "./components/MadeUpCustomerReview/Data/data";
 import SingleReview from "./components/MadeUpCustomerReview/components/SingleReview";
 import HProductList from "./components/HProductList/HProductList";
+import Footer from "../Footer/Footer";
 // imported hooks or libraries
 import { useEffect, useState } from "react";
 import styled from 'styled-components'
 import { Button } from "@mui/material";
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+
+const Container = styled.div`
+    padding: 0;
+    margin: 0;
+`
 const Spacer = styled.div`
     height: ${(props) => (props.height)}px;
 `
@@ -38,7 +43,6 @@ export default function Home() {
                 const car_response = await fetch(`${url}/offers/images`, { method: 'GET' }); // Response for carousel
                 const car_data = await car_response.json();
                 setOfferState(car_data);
-                setNewArrival(arr_data);
             } catch (error) {
                 console.error(error);
             }
@@ -58,7 +62,7 @@ export default function Home() {
     if (loading)
         return <Loading />;
     return (
-        <>
+        <Container>
             <Spacer height={70}/>
             <Corousel imageList={offer} isOffer={true}/>
             <Category />
@@ -71,9 +75,10 @@ export default function Home() {
             <CustomerReviewList items={Reviews} />
             <Spacer height={20}/>
             <HProductList title='Best Sellers'/>
+            <Footer position='static' marginTop={50}/>
             <HelpButton>
                 <Button sx={{borderRadius: '15px'}}variant='contained'> help ?</Button>
             </HelpButton>
-        </>
+        </Container>
     );
 }

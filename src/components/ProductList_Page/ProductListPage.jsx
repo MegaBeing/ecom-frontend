@@ -5,7 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect,useState } from 'react';
 import ProductContainer from './components/ProductContainer';
-
+import Footer from '../Footer/Footer';
 
 const Message = styled.div`
     margin:10px;

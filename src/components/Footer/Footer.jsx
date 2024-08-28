@@ -8,13 +8,22 @@ const Container = styled.div`
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
+    margin-top: ${props => props.marginTop}px;
+    position: ${props => props.position};
+    bottom: 0;
     /* height: 500px; */
     border-radius: 30px 30px 0 0 ;
 `
-export default function Footer() {
+const AboutTitle = styled.div`
+    font-size: 32px;
+`
+const About = () => {
+    return
+}
+export default function Footer({ position, marginTop }) {
 
     return (
-        <Container>
+        <Container position={position} marginTop={marginTop}>
             {sectionData.map((ele, index) => (
                 <Section key={index} title={ele.title} linkList={ele.linkList} />
             ))}

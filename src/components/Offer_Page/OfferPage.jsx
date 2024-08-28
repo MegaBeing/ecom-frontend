@@ -4,6 +4,7 @@ import PriceFilter from "./components/PriceFilter";
 import { useParams } from "react-router-dom";
 import ProductContainer from "../ProductList_Page/components/ProductContainer";
 import { Button } from "@mui/material";
+import Footer from "../Footer/Footer";
 const Spacer = styled.div`
     height: ${props => props.height}px;
 `
@@ -109,6 +110,7 @@ export default function OfferPage() {
                     more
                 </Button>
             </ButtonContainer>
+            <Footer marginTop={30}/>
         </>
     )
 }

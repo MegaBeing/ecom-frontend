@@ -97,8 +97,6 @@ function App() {
           <Route path='/my-account' element={<AccountPage />} />
           <Route path='/offer/:id' element={<OfferPage />} />
         </Routes>
-        <Spacer height = {30}/>
-        <Footer />
       </BrowserRouter>)}
       {isDesktopOrLaptop &&
         <DesktopMessage />
