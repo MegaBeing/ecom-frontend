@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 const SectionContainer = styled.div`
+    width: 43%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
-    margin-left: 20px;
+    align-items: center;
     margin-top: 30px;
 
 `
@@ -23,7 +23,7 @@ const StyledLink = styled(Link)`
     text-decoration: none;
     color: #cacaca;
     /* text-decoration:underline; */
-    margin-left: 10px;
+    /* margin-left: 10px; */
 `
 
 export default function LinkSection({title, linkList}){

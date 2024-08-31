@@ -14,6 +14,14 @@ const Container = styled.div`
     bottom: 0;
     /* height: 500px; */
     border-radius: 30px 30px 0 0 ;
+    padding-bottom: 20px;
+`
+const LinkContainer = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items: center;
 `
 
 export default function Footer({ position, marginTop }) {
@@ -21,9 +29,11 @@ export default function Footer({ position, marginTop }) {
     return (
         <Container position={position} marginTop={marginTop}>
             <DescriptionSection title = {descriptionData.title} description={descriptionData.description}/>
-            {sectionData.map((ele, index) => (
-                <LinkSection key={index} title={ele.title} linkList={ele.linkList} />
-            ))}
+            <LinkContainer>
+                {sectionData.map((ele, index) => (
+                    <LinkSection key={index} title={ele.title} linkList={ele.linkList} />
+                ))}
+            </LinkContainer>
         </Container>
     );
 }

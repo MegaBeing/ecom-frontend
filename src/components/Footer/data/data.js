@@ -20,7 +20,27 @@ export const sectionData = [
                 link: '/cart'
             }
         ]
-    }
+    },{
+        title: 'links',
+        linkList: [
+            {
+                title: 'home',
+                link: '/home'
+            }, {
+                title: 'all products',
+                link: '/product-list'
+            },{
+                title: 'my account',
+                link: '/my-account'
+            }, {
+                title: 'my orders',
+                link: '/my-orders'
+            },{
+                title: 'my cart',
+                link: '/cart'
+            }
+        ]
+    },
 ]
 export const descriptionData = {
     title: "About BatuaWala",
