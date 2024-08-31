@@ -6,8 +6,6 @@ const SectionContainer = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 30px;
-
 `
 const Title = styled.div`
     font-size: 25px;
@@ -25,18 +23,19 @@ const StyledLink = styled(Link)`
     /* text-decoration:underline; */
     /* margin-left: 10px; */
 `
-
-export default function LinkSection({title, linkList}){
-    return(
+export default function LinkSection({ title, linkList }) {
+    return (
         <SectionContainer>
             <Title>
                 {title}
             </Title>
-            {linkList.map((ele,index) => (
-                <StyledLink key={index} to={ele.link}>
-                    {ele.title}
-                </StyledLink>
-            ))}
+            {
+                linkList.map((ele, index) => (
+                    <StyledLink key={index} to={ele.link}>
+                        {ele.title}
+                    </StyledLink>
+                ))
+            }
         </SectionContainer>
     )
 }

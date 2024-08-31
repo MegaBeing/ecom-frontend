@@ -22,6 +22,7 @@ const LinkContainer = styled.div`
     flex-direction:row;
     justify-content:space-around;
     align-items: center;
+    margin-top: 20px;
 `
 
 export default function Footer({ position, marginTop }) {

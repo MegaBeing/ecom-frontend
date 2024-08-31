@@ -24,8 +24,8 @@ export const sectionData = [
         title: 'links',
         linkList: [
             {
-                title: 'home',
-                link: '/home'
+                title: 'Facebook',
+                link: 'https://www.facebook.com'
             }, {
                 title: 'all products',
                 link: '/product-list'
