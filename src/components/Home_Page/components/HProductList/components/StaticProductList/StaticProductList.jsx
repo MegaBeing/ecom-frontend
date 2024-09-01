@@ -6,6 +6,7 @@ const Container = styled.div`
     justify-content:space-around;
     align-items:center;
     row-gap: 14px;
+    margin-bottom: 20px;
 `
 
 export default function StaticProductList({ products }) {

@@ -4,34 +4,34 @@ import Collection3 from '/3.png'
 export const CategoryItemsData = [
     {
         "id": 1,
-        "product_name": "Potlis",
+        "product_name": "Potli",
         "imageUrl": "/media/category/Potli.jpeg"
     }, {
         "id": 2,
-        "product_name": "Clutch bag",
+        "product_name": "Clutch",
         "imageUrl": "/media/category/Clutch.jpeg"
     }, {
         "id": 3,
-        "product_name": "Batua bag",
+        "product_name": "Batua",
         "imageUrl": "/media/category/Batua.jpeg"
     }, {
         "id": 4,
-        "product_name": "Bridal bag",
+        "product_name": "Bridal",
         "imageUrl": "/media/category/Bridal.jpeg"
     },
 ]
 export const CollectionListData = [
     {
         id: 1,
-        name: 'italian-collection',
+        name: 'italian',
         imageUrl: Collection1
     }, {
         id: 2,
-        name: 'western-collection',
+        name: 'western',
         imageUrl: Collection2
     }, {
         id: 3,
-        name: 'indian-collection',
+        name: 'indian',
         imageUrl: Collection3
     },
 ] 
