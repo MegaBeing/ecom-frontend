@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { tempCatList } from '../../../../assets/data'
-import CategoryItem from './components/CategoryItem'
+import { CollectionListData } from '../../../../assets/data'
+import CollectionItem from './components/CollectionItem'
 import { Link } from 'react-router-dom'
 const Div = styled.div`
     width: 100%;
@@ -18,13 +18,13 @@ const StyledLink = styled(Link)`
     box-shadow: 0 0 10px gray;
     border-radius: 10px;
 `
-export default function Category() {
+export default function Collection() {
 
     return (
         <Div>
-            {tempCatList.map((item,index) => (
+            {CollectionListData.map((item,index) => (
                 <StyledLink to={`/product-list?category=${item.category}`}>
-                    <CategoryItem key={index} {...item} />
+                    <CollectionItem key={index} {...item} />
                 </StyledLink>
             ))}
         </Div>

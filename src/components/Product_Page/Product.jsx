@@ -102,7 +102,6 @@ export default function Product() {
     }, [id])
     const addToCart = async () => {
         try {
-            console.log(id);
             const response = await fetch(`${api_url}/user/cart/add-to-cart/`, {
                 method: 'POST',
                 headers: {

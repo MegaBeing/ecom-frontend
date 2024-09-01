@@ -1,12 +1,13 @@
 // imported components
 import Corousel from "./components/Corousel";
-import Category from "./components/Category/Category";
+import Category from "./components/Collection/Collection";
 import Loading from "../Loading";
 import CustomerReviewList from "./components/MadeUpCustomerReview/CustomerReviewList";
 import { ReviewItems } from "./components/MadeUpCustomerReview/Data/data";
 import SingleReview from "./components/MadeUpCustomerReview/components/SingleReview";
 import HProductList from "./components/HProductList/HProductList";
 import Footer from "../Footer/Footer";
+import { CategoryItemsData } from "../../assets/data";
 // imported hooks or libraries
 import { useEffect, useState } from "react";
 import styled from 'styled-components'
@@ -36,6 +37,7 @@ const Heading = styled.div`
 export default function Home() {
     const [offer, setOfferState] = useState(null);
     const [loading, setLoading] = useState(true);
+    const url = import.meta.env.VITE_API_URL; 
     useEffect(() => {
         const Data = async () => {
             try {
@@ -65,16 +67,17 @@ export default function Home() {
         <Container>
             <Spacer height={70}/>
             <Corousel imageList={offer} isOffer={true}/>
+            <HProductList isStatic={true} Data={CategoryItemsData} title='Shop By Category'/>
             <Category />
             <Spacer height={20}/>
             {/* <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/> */}
             <Spacer height={20}/>
-            <HProductList title='New Arrivals'/>
+            <HProductList isStatic={false} link={`${url}/products/filter/?is_exclusive=True`} title='New Arrivals'/>
             <Spacer height={20}/>
             <Heading>Wall Of Fame</Heading>
             <CustomerReviewList items={Reviews} />
             <Spacer height={20}/>
-            <HProductList title='Best Sellers'/>
+            <HProductList isStatic={false} link={`${url}/products/filter/?is_best_seller=True`} title='Best Sellers'/>
             <Footer position='static' marginTop={50}/>
             <HelpButton>
                 <Button sx={{borderRadius: '15px'}}variant='contained'> help ?</Button>

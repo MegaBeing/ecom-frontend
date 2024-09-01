@@ -35,7 +35,6 @@ export default function CartPage({ isAuth }) {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log(data);
                 setCartList(data[0]);
             }
         } catch (error) {

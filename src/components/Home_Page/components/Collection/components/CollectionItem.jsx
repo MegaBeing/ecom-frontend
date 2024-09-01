@@ -14,7 +14,7 @@ const Image = styled.img`
     border-radius: 10px;
 `
 
-export default function CategoryItem({ imageUrl , category }) {
+export default function CollectionItem({ imageUrl  }) {
 
     return (
         <StyledButtonBase>
