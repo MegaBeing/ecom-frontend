@@ -11,7 +11,6 @@ const Container = styled.div`
     align-items:center;
 `
 export default function ProductContainer({ products }) {
-    const api_url = import.meta.env.VITE_API_URL;
     return (
         <Container>
             {products.map((ele) => (
