@@ -136,7 +136,7 @@ export default function Product() {
             console.error('Error:', error);
         }
         finally{
-            setLoadingState(true);
+            setLoadingState(false);
         }
 
     }

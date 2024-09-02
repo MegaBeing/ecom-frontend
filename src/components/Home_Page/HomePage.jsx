@@ -78,7 +78,7 @@ export default function Home() {
             <CustomerReviewList items={Reviews} />
             <Spacer height={20}/>
             <HProductList isStatic={false} link={`${url}/products/filter/?is_best_seller=True`} title='Best Sellers'/>
-            <Footer position='static' marginTop={50}/>
+            <Footer position='static' margin_top={50}/>
             <HelpButton>
                 <Button sx={{borderRadius: '15px'}}variant='contained'> help ?</Button>
             </HelpButton>

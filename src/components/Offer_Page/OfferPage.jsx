@@ -63,7 +63,7 @@ export default function OfferPage() {
                     more
                 </Button>
             </ButtonContainer>
-            <Footer marginTop={30} />
+            <Footer margin_top={30} />
         </>
     )
 }

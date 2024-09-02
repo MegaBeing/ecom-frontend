@@ -25,10 +25,10 @@ const LinkContainer = styled.div`
     margin-top: 20px;
 `
 
-export default function Footer({ position, marginTop }) {
+export default function Footer({ position, margin_top }) {
 
     return (
-        <Container position={position} marginTop={marginTop}>
+        <Container position={position} marginTop={margin_top}>
             <DescriptionSection title = {descriptionData.title} description={descriptionData.description}/>
             <LinkContainer>
                 {sectionData.map((ele, index) => (

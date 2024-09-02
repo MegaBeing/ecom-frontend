@@ -3,6 +3,7 @@ import SingleCartItem from './components/SingleCartItem';
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import NoAuthCart from './components/NoAuthCart';
+import Address from '../Query/Address/Address';
 const CartContainer = styled.div`
     margin-top: 30px;
     width:100%;
@@ -19,7 +20,7 @@ const ButtonContainer = styled.div`
     justify-content:center;
 `
 const Spacer = styled.div`
-    height: ${(props) => (props.height)}px;
+    height: ${props => (props.height)}px;
 `
 export default function CartPage({ isAuth }) {
     const api_url = import.meta.env.VITE_API_URL;
@@ -60,12 +61,13 @@ export default function CartPage({ isAuth }) {
                         />
                     ))}
                 </CartContainer>
+                <Address/>
                 <ButtonContainer>
                     <Button
                         sx={{ width: '90%', borderRadius: '30px' }}
                         variant="contained"
                     >
-                        Checkout
+                        pay {`₹${cartList.total_amount}`}
                     </Button>
                 </ButtonContainer>
             </>

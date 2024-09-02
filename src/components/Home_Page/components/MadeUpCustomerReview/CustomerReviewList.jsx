@@ -40,17 +40,17 @@ const Indicator = styled.span`
 `;
 
 export default function CustomerReviewList({ items }){
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [active_index, setActiveIndex] = useState(0);
 
   const handlers = useSwipeable({
     onSwipedLeft: () => {
       if (activeIndex < items.length - 1) {
-        setActiveIndex(activeIndex + 1);
+        setActiveIndex(active_index + 1);
       }
     },
     onSwipedRight: () => {
       if (activeIndex > 0) {
-        setActiveIndex(activeIndex - 1);
+        setActiveIndex(active_index - 1);
       }
     },
     preventDefaultTouchmoveEvent: true,
@@ -61,10 +61,10 @@ export default function CustomerReviewList({ items }){
     <CarouselContainer {...handlers}>
       <IndicatorContainer>
         {items.map((_, index) => (
-          <Indicator key={index} active={index === activeIndex} />
+          <Indicator key={index} active={index == active_index} />
         ))}
       </IndicatorContainer>
-      <CarouselTrack activeIndex={activeIndex}>
+      <CarouselTrack activeIndex={active_index}>
         {items.map((item, index) => (
           <CarouselSlide key={index}>
             {item}
