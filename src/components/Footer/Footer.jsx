@@ -3,7 +3,7 @@ import LinkSection from "./components/LinkSection";
 import {sectionData, descriptionData }from "./data/data";
 import DescriptionSection from "./components/DescriptionSection";
 const Container = styled.div`
-    background-image: linear-gradient(80deg, #6c8b9a ,  #2e5060);
+    background-image: linear-gradient(80deg, #496776 ,  #103f54);
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;

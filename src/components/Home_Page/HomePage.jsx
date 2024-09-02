@@ -67,7 +67,7 @@ export default function Home() {
         <Container>
             <Spacer height={70}/>
             <Corousel imageList={offer} isOffer={true}/>
-            <HProductList isStatic={true} Data={CategoryItemsData} title='Shop By Category'/>
+            <HProductList isStatic={true} Data={CategoryItemsData} title='Shop By Category' className='category'/>
             <Category />
             <Spacer height={20}/>
             {/* <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/> */}

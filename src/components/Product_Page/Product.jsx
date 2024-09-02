@@ -6,6 +6,7 @@ import Collapsible from './components/Collapsible';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading';
 const TitleContainer = styled.div`
     width: 100%;
     display: flex;
@@ -28,14 +29,17 @@ const ProductName = styled.h1`
     margin: 0;
 `
 const PriceContainer = styled.div`
-    background-color: #d1cdcd;
+    color: white;
+    background-image: linear-gradient(45deg, #e77f00, #ff8c00);
     padding: 2% 5%;
     font-weight: 400;
     font-size: 20px;
     display:flex;
     justify-content: center;
     align-items:center;
-    box-shadow: 0 0 5px gray;
+    border-radius: 10px 0 0 10px ; 
+    border: 1px #c26b00 solid;
+    box-shadow: 0 0 5px #ffce92 inset;
 `
 const SecondContainer = styled.div`
     margin-top: 10px;
@@ -61,7 +65,15 @@ const DiscountContainer = styled.div`
     align-items: center;
 `
 const PreviousPriceContainer = styled.div`
-    text-decoration: line-through;
+    position:relative;
+    &:before{
+        position: absolute;
+        top: 50%;
+        width:100%;
+        content: '';
+        border-top:1px black solid;
+
+    }
 `
 const Discount = styled.span`
     color: #009922;
@@ -95,13 +107,16 @@ export default function Product() {
     const { id } = useParams();
     const api_url = import.meta.env.VITE_API_URL;
     const [product, setProductsState] = useState({});
+    const [loading, setLoadingState] = useState(true);
     const [addedToCart, setCartState] = useState(false);
+    const [descriptionList, setDescriptionList] = useState({});
     const navigate = useNavigate();
     useEffect(() => {
         productData();
     }, [id])
     const addToCart = async () => {
         try {
+            setLoadingState(true);
             const response = await fetch(`${api_url}/user/cart/add-to-cart/`, {
                 method: 'POST',
                 headers: {
@@ -120,17 +135,38 @@ export default function Product() {
         catch (error) {
             console.error('Error:', error);
         }
+        finally{
+            setLoadingState(true);
+        }
+
     }
     const productData = async () => {
         try {
             const response = await fetch(`${api_url}/products/${id}`)
-            const data = await response.json();
-            setProductsState(data);
+            if(response.ok)
+            {
+                const data = await response.json();
+                setProductsState(data);  
+                // console.log(data);
+                let description = {};
+                description['product_description'] = data['description']
+                description["product_outer_material"] = data["product_outer_material"]
+                description["product_inner_material"] = data["product_inner_material"]
+                description["product_sling"] = data["product_sling"] 
+                description["product_closer"] = data["product_closer"]
+                description["product_pocket"] = data["product_pocket"]
+                setDescriptionList(description)
+            }
         }
         catch (error) {
             console.error('Error:', error);
         }
+        finally{
+            setLoadingState(false);
+        }
     }
+    if(loading)
+        return <Loading />
     return (
         <>
             <Spacer height={70} />
@@ -149,7 +185,7 @@ export default function Product() {
             <SecondContainer>
                 <RatingContainer>
                     <Rating name="read-only" value={Math.round(Product.rating)} readOnly />
-                    ({product.rating})
+                    ({product.rating ? product.rating: 0})
                 </RatingContainer>
                 <DiscountContainer>
                     <PreviousPriceContainer>
@@ -158,7 +194,7 @@ export default function Product() {
                     <Discount>{Math.round(((product.previous_price - product.price) / product.previous_price) * 100)}% off</Discount>
                 </DiscountContainer>
             </SecondContainer>
-            <Collapsible description={product.description} />
+            <Collapsible {...descriptionList} />
             <AddToCartButtonContainer>
                 {addedToCart ? (<AddedToCart>Added to Cart</AddedToCart> ) :
                     (<Button

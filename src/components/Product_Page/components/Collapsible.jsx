@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ButtonBase } from '@mui/material';
 import Collapse from 'react-bootstrap/Collapse';
 import downArrow from '/down-arrow.svg'
+import DesContainer from './Description/components/DescriptionContainer';
 const Container = styled.div`
     position: relative;
     margin-top: 30px;
@@ -43,8 +44,8 @@ const Image = styled.img`
     }
 `
 const buttonBaseSx = { width: '100%', display: 'flex', justifyContent: 'space-between' };
-function Collapsible({ description }) {
-    const [open, setOpen] = useState(false);
+function Collapsible(props) {
+    const [open, setOpen] = useState(true);
 
     return (
         <Container>
@@ -59,7 +60,7 @@ function Collapsible({ description }) {
                 </ButtonContainer>
                 <Collapse in={open}>
                     <TextContainer id="example-collapse-text">
-                        {description}
+                        <DesContainer {...props} />
                     </TextContainer>
                 </Collapse>
             </DescriptionContainer>

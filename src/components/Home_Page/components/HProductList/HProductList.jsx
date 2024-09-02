@@ -31,7 +31,6 @@ export default function HProductList({ isStatic, Data, link, title }) {
                     const data = await response.json();
                     const slicedData =  data.slice(0,4)
                     setProductListState(slicedData)
-                    console.log(title,data)
                 }
             }
             catch (error) {

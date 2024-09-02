@@ -47,7 +47,7 @@ export default function CartPage({ isAuth }) {
     }, []);
 
     return (
-        (isAuth && cartList.length != 0 && cartList.cart_items.length != 0) ? (
+        (isAuth && cartList && cartList.length != 0 && cartList.cart_items.length != 0) ? (
             <>
                 <Spacer height={70} />
                 <CartContainer>
