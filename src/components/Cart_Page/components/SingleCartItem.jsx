@@ -4,13 +4,13 @@ import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';import { useState } from 'react';
 const ItemContainer = styled.div`
-width:90%;
-padding: 2%;
-height: 75px;
-display:flex;
-flex-direction:row;
-justify-content:start;
-align-items:center;
+    width:90%;
+    padding: 2%;
+    height: 75px;
+    display:flex;
+    flex-direction:row;
+    justify-content:start;
+    align-items:center;
 `
 
 const Image = styled.img`
@@ -97,7 +97,7 @@ export default function SingleCartItem({ product, itemQuantity, onQuantityChange
             <InfoButContainer>
                 <InfoContainer>
                     <ItemName>{product.product_name}</ItemName>
-                    <PriceContainer>{`₹${product.price}`}</PriceContainer>
+                    <PriceContainer>{`${quantity} x ₹${product.price}`}</PriceContainer>
                 </InfoContainer>
                 <ButtonContainer>
                     <IconButton onClick={subtractQuantity} disabled={quantity <= 0}>

@@ -27,6 +27,7 @@ export default function ProductListPage() {
     const api_url = import.meta.env.VITE_API_URL;
     const searchParams = new URLSearchParams(location.search);
     const keys = Array.from(searchParams.keys());
+    // console.log(keys,searchParams)
     useEffect(() => {
         productData();
     }, [location.search])
@@ -41,6 +42,18 @@ export default function ProductListPage() {
             if (keys.includes('category')) {
                 url += `category=${searchParams.get('category')}&`;
                 isFilter = true;
+            }
+            if(keys.includes('collection')){
+                url+=`collection=${searchParams.get('collection')}`
+                isFilter = true;
+            }
+            if(keys.includes('is_best_seller')){
+                url+=`is_best_seller=${searchParams.get('is_best_seller')}`
+                isFilter = true
+            }
+            if(keys.includes('is_exclusive')){
+                url+=`is_exclusive=${searchParams.get('is_exclusive')}`
+                isFilter = true
             }
             if (keys.includes('max_value')) {
                 url += `max_value=${searchParams.get('max_value')}&`;
@@ -61,6 +74,7 @@ export default function ProductListPage() {
             {
                 url = `${api_url}/products/`
             }
+            // console.log(url);
             const response = await fetch(url);
             const data = await response.json();
             setProductsState(data);

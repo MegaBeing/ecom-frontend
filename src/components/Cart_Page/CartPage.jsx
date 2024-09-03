@@ -5,13 +5,19 @@ import { useEffect, useState } from 'react';
 import NoAuthCart from './components/NoAuthCart';
 import Address from '../Query/Address/Address';
 const CartContainer = styled.div`
-    margin-top: 30px;
     width:100%;
     height: fit-content;
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
+`
+const Title = styled.div`
+    width:100%;
+    text-align:center;
+    font-size: 32px;
+    font-weight: 32px;
+    color: #0175c3;
 `
 const ButtonContainer = styled.div`
     margin-top: 30px;
@@ -50,7 +56,9 @@ export default function CartPage({ isAuth }) {
     return (
         (isAuth && cartList && cartList.length != 0 && cartList.cart_items.length != 0) ? (
             <>
-                <Spacer height={70} />
+                <Spacer height={100} />
+                <Title>My Cart</Title>
+                <Spacer height={50} />
                 <CartContainer>
                     {cartList.cart_items.map((ele) => (
                         <SingleCartItem
@@ -61,6 +69,7 @@ export default function CartPage({ isAuth }) {
                         />
                     ))}
                 </CartContainer>
+                <Spacer height={30}/>
                 <Address/>
                 <ButtonContainer>
                     <Button
