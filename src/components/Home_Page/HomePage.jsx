@@ -72,7 +72,7 @@ export default function Home() {
             <Spacer height={20}/>
             {/* <FlatDisplayComponent heading='New Arrivals' valueList={newArrival}/> */}
             <Spacer height={20}/>
-            <HProductList isStatic={false} link={`${url}/products/filter/?is_exclusive=True`} title='New Arrivals'/>
+            <HProductList isStatic={false} link={`${url}/products/filter/?is_exclusive=True`} title='Exclusive'/>
             <Spacer height={20}/>
             <Heading>Wall Of Fame</Heading>
             <CustomerReviewList items={Reviews} />

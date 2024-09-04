@@ -1,11 +1,7 @@
-import './index.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate} from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useMediaQuery } from 'react-responsive'
-import styled from 'styled-components';
-const Spacer = styled.div`
-  height: ${props => props.height}px;
-`
+
 // Page Imports
 import Home from './components/Home_Page/HomePage';
 import NavBar from './components/Navigation_Bar/NavBar';
@@ -18,7 +14,6 @@ import OrderPage from './components/Order_Page/OrderPage.jsx';
 import DesktopMessage from './components/DesktopMessage.jsx';
 import AccountPage from './components/Account_Page/AccountPage.jsx';
 import OfferPage from './components/Offer_Page/OfferPage.jsx';
-import Footer from './components/Footer/Footer.jsx';
 
 async function Refresh(refresh_token, api_url) {
   try {
@@ -34,6 +29,10 @@ async function Refresh(refresh_token, api_url) {
       localStorage.setItem('access_token', data['access']);
       return true;
     } else if (response.status === 401) {
+      const navigate = useNavigate();
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      navigate('/auth')
       return false;
     }
   } catch (error) {
@@ -83,7 +82,8 @@ function App() {
   }, []);
   return (
     <>
-      {isTabletOrMobile && (<BrowserRouter>
+      {isTabletOrMobile && (
+        <>import './index.css';
         <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
@@ -97,7 +97,7 @@ function App() {
           <Route path='/my-account' element={<AccountPage />} />
           <Route path='/offer/:id' element={<OfferPage />} />
         </Routes>
-      </BrowserRouter>)}
+      </>)}
       {isDesktopOrLaptop &&
         <DesktopMessage />
       }

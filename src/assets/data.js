@@ -5,47 +5,47 @@ export const CategoryItemsData = [
     {
         "id": 1,
         "product_name": "Potli",
-        "imageUrl": "/media/category/Potli.jpeg"
+        "imageUrl": "/media/category/Potli.png"
     }, {
         "id": 2,
         "product_name": "Clutch",
-        "imageUrl": "/media/category/Clutch.jpeg"
+        "imageUrl": "/media/category/Clutch.png"
     }, {
         "id": 3,
         "product_name": "Batua",
-        "imageUrl": "/media/category/Batua.jpeg"
+        "imageUrl": "/media/category/Batua.png"
     }, {
         "id": 4,
         "product_name": "Bridal",
-        "imageUrl": "/media/category/Bridal.jpeg"
+        "imageUrl": "/media/category/Bridal.png"
     },
 ]
 export const CollectionListData = [
     {
-        id: 1,
-        name: 'italian',
-        imageUrl: Collection1
+        "id": 1,
+        "name": 'italian',
+        "imageUrl": Collection1
     }, {
-        id: 2,
-        name: 'western',
-        imageUrl: Collection2
+        "id": 2,
+        "name": 'western',
+        "imageUrl": Collection2
     }, {
-        id: 3,
-        name: 'indian',
-        imageUrl: Collection3
+        "id": 3,
+        "name": 'indian',
+        "imageUrl": Collection3
     },
 ] 
 export const tempCatList = [
     {
-        category:'Clutch Bag',
-        imageUrl:Collection1,
+        "category":'Clutch Bag',
+        "imageUrl":Collection1,
     },
     {
-        category:'Potlis',
-        imageUrl:Collection2,
+        "category":'Potlis',
+        "imageUrl":Collection2,
     },
     {
-        category:'Batua bag',
-        imageUrl:Collection3,
+        "category":'Batua bag',
+        "imageUrl":Collection3,
     },
 ]
