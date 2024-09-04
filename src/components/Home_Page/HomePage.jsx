@@ -65,7 +65,7 @@ export default function Home() {
         return <Loading />;
     return (
         <Container>
-            <Spacer height={70}/>
+            <Spacer height={50}/>
             <Corousel imageList={offer} isOffer={true}/>
             <HProductList isStatic={true} Data={CategoryItemsData} title='Shop By Category' className='category'/>
             <Category />

@@ -1,16 +1,20 @@
 import styled from 'styled-components'
 import SingleCartItem from './components/SingleCartItem';
 import { Button } from '@mui/material';
+import { CSSTransition } from 'react-transition-group'
 import { useEffect, useState } from 'react';
 import NoAuthCart from './components/NoAuthCart';
 import Address from '../Query/Address/Address';
+import CartTotal from './components/CartTotal';
+import AddressChanger from '../Query/Address/AddressChanger.jsx';
 const CartContainer = styled.div`
     width:100%;
-    height: fit-content;
+    height: 400px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
+    justify-content:start;
     align-items:center;
+    overflow: scroll;
 `
 const Title = styled.div`
     width:100%;
@@ -20,7 +24,15 @@ const Title = styled.div`
     color: #0175c3;
 `
 const ButtonContainer = styled.div`
+    box-shadow: 0 -2px 5px gray;
+    border-radius: 20px 20px 0 0 ;
+    padding: 5% 0;
+    background-color: #fffefe;
+    position:absolute;
+    bottom: 0;
+    width:100%;
     margin-top: 30px;
+    flex-direction:column;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -31,6 +43,8 @@ const Spacer = styled.div`
 export default function CartPage({ isAuth }) {
     const api_url = import.meta.env.VITE_API_URL;
     const [cartList, setCartList] = useState([]);
+    const [billing, setBilling] = useState([]);
+    const [addchange, setAddChange] = useState(false);
     const cartData = async () => {
         try {
             const response = await fetch(`${api_url}/user/cart`, {
@@ -43,6 +57,10 @@ export default function CartPage({ isAuth }) {
             if (response.ok) {
                 const data = await response.json();
                 setCartList(data[0]);
+                let bill = [{'key': 'Total Amount',
+                    'value': `₹ ${data[0].total_amount}`
+                }]
+                setBilling(bill);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -69,9 +87,11 @@ export default function CartPage({ isAuth }) {
                         />
                     ))}
                 </CartContainer>
-                <Spacer height={30}/>
-                <Address/>
+                <Spacer height={30} />
+                <CartTotal elements={billing}/>
                 <ButtonContainer>
+                    <Address />
+                    <Spacer height={20}/>
                     <Button
                         sx={{ width: '90%', borderRadius: '30px' }}
                         variant="contained"
@@ -79,6 +99,9 @@ export default function CartPage({ isAuth }) {
                         pay {`₹${cartList.total_amount}`}
                     </Button>
                 </ButtonContainer>
+                <CSSTransition in={!addchange} timeout={200} classNames='address-adder' unmountOnExit>
+                    <AddressChanger/>
+                </CSSTransition>
             </>
         ) : (
             <>
