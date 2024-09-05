@@ -32,7 +32,7 @@ const AddressContainer = styled.div`
     margin-bottom: 10px; 
 `
 
-export default function Address() {
+export default function Address({setAddChange}) {
     const [addresses, setAddresses] = useState([
         {
             id: 1,
@@ -81,6 +81,7 @@ export default function Address() {
                             key={address.id}
                             setActiveIndex={setActiveIndex}
                             index = {index}
+                            setAddChange={setAddChange}
                             {...address}
                         />
                     ))}

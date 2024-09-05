@@ -54,7 +54,7 @@ export default function CheckedAddress(props) {
                 </AddressName>
                 {props.active && <CheckIcon sx={{ marginRight: '10px' }} />}
             </CheckContainer>
-            {props.active ? (<Button variant='contained' sx={buttonSx}>
+            {props.active ? (<Button variant='contained' sx={buttonSx} onClick={() => props.setAddChange(true)}>
                 <CreateIcon />
             </Button>) : (<Spacer />)}
         </Container>

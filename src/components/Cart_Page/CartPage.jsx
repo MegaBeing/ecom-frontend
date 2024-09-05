@@ -8,6 +8,9 @@ import Address from '../Query/Address/Address';
 import CartTotal from './components/CartTotal';
 import AddressChanger from '../Query/Address/AddressChanger.jsx';
 const CartContainer = styled.div`
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
     width:100%;
     height: 400px;
     display:flex;
@@ -57,7 +60,8 @@ export default function CartPage({ isAuth }) {
             if (response.ok) {
                 const data = await response.json();
                 setCartList(data[0]);
-                let bill = [{'key': 'Total Amount',
+                let bill = [{
+                    'key': 'Total Amount',
                     'value': `₹ ${data[0].total_amount}`
                 }]
                 setBilling(bill);
@@ -88,10 +92,10 @@ export default function CartPage({ isAuth }) {
                     ))}
                 </CartContainer>
                 <Spacer height={30} />
-                <CartTotal elements={billing}/>
+                <CartTotal elements={billing} />
                 <ButtonContainer>
-                    <Address />
-                    <Spacer height={20}/>
+                    <Address setAddChange={setAddChange} />
+                    <Spacer height={20} />
                     <Button
                         sx={{ width: '90%', borderRadius: '30px' }}
                         variant="contained"
@@ -99,8 +103,8 @@ export default function CartPage({ isAuth }) {
                         pay {`₹${cartList.total_amount}`}
                     </Button>
                 </ButtonContainer>
-                <CSSTransition in={!addchange} timeout={200} classNames='address-adder' unmountOnExit>
-                    <AddressChanger/>
+                <CSSTransition in={addchange} timeout={200} classNames='address-adder' unmountOnExit>
+                    <AddressChanger setAddChange={setAddChange} />
                 </CSSTransition>
             </>
         ) : (
