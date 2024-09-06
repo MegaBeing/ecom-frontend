@@ -113,7 +113,7 @@ export default function AddressForm({ setAddChange, addresses, activeIndex }) {
         }
     ]
     useEffect(() => {
-        console.log('in_use_effect')
+        // console.log('in_use_effect')
         fields.forEach((element) => {
             // console.log(addresses[activeIndex][`${element.actual}`])
             if (addresses[activeIndex][`${element.actual}`] !== null) {
