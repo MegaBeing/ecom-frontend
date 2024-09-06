@@ -31,7 +31,7 @@ export default function Login() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(body)
-            })
+            }) 
 
             if(response.status === 200) {
             const data = await response.json()

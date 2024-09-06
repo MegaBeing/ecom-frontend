@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CheckedAddress from "./components/CheckedAddress";
-import { useState } from "react";
+
 
 const OuterContainer = styled.div`
     width: 100%;
@@ -18,6 +18,7 @@ const InnerContainer = styled.div`
 
 const Title = styled.div`
     margin-top: 10px;
+    margin-bottom: 10px;
     text-align: center;
     width: 100%;
     font-size: 24px;
@@ -26,49 +27,15 @@ const Title = styled.div`
 
 const AddressContainer = styled.div`
     display: flex;
+    width:100%;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px; 
+    overflow: scroll;
 `
 
-export default function Address({setAddChange}) {
-    const [addresses, setAddresses] = useState([
-        {
-            id: 1,
-            active: true,
-            address_name: 'home',
-            compiled_address: 'tower no. 8, flat no. 003, Nri City (GH-1), Greater Noida, 201310, Uttar Pradesh, India',
-            address_line1: 'tower no. 8, flat no. 003 ',
-            address_line2: 'Nri City (GH-1)',
-            city: 'Greater Noida',
-            state: 'Uttar Pradesh',
-            pincode: '201310',
-            country: 'India'
-        },
-        {
-            id: 2,
-            active: false,
-            address_name: 'Office',
-            compiled_address: 'tower no. 8, flat no. 003, Nri City (GH-1), Greater Noida, 201310, Uttar Pradesh, India',
-            address_line1: 'tower no. 8, flat no. 003 ',
-            address_line2: 'Nri City (GH-1)',
-            city: 'Greater Noida',
-            state: 'Uttar Pradesh',
-            pincode: '201310',
-            country: 'India'
-        },
-    ]);
-
-    const setActiveIndex = (index) => {
-        setAddresses(prevAddresses =>
-            prevAddresses.map((address, i) => ({
-                ...address,
-                active: i === index
-            }))
-        );
-    }
-
+export default function Address({setAddChange, addresses, activeIndex, setActiveIndex}) {
     return (
         <OuterContainer>
             <InnerContainer>
@@ -76,13 +43,15 @@ export default function Address({setAddChange}) {
                     Address
                 </Title>
                 <AddressContainer>
-                    {addresses.map((address, index) => (
+                    {addresses.map((address,index) => (
                         <CheckedAddress
                             key={address.id}
+                            id ={address.id}
+                            index={index}
                             setActiveIndex={setActiveIndex}
-                            index = {index}
+                            active = {index === activeIndex}
                             setAddChange={setAddChange}
-                            {...address}
+                            type = {address.type}
                         />
                     ))}
                 </AddressContainer>

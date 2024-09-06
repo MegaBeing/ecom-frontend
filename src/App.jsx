@@ -27,23 +27,23 @@ async function Refresh(refresh_token, api_url) {
     if (response.status === 200) {
       const data = await response.json();
       localStorage.setItem('access_token', data['access']);
-      return true;
-    } else if (response.status === 401) {
-      const navigate = useNavigate();
+      localStorage.setItem('refresh_token', data['refresh']);
+      return { success: true };
+    }
+    else if (response.status == 401) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
-      navigate('/auth')
-      return false;
+      return { success: false, error: 'Refresh_401' }; // True means it comes from refresh_Function
     }
   } catch (error) {
     // console.error(error);
-    return false;
+    return { success: false, error: 'Refresh_500' };
   }
 }
 
 async function CheckAuth(api_url) {
   const access_token = localStorage.getItem('access_token');
-  if (!access_token) return false;
+  if (!access_token) return { success: false, error: 'Access-not-found' };
 
   try {
     const body = JSON.stringify({ 'token': access_token });
@@ -54,14 +54,14 @@ async function CheckAuth(api_url) {
     });
 
     if (response.status === 200) {
-      return true;
+      return { success: true };
     } else if (response.status === 401) {
       const refresh_token = localStorage.getItem('refresh_token');
       return Refresh(refresh_token, api_url);
     }
   } catch (error) {
     // console.error(error);
-    return false;
+    return { success: false, error: 'Access-500' };
   }
 }
 
@@ -72,10 +72,23 @@ function App() {
   const isDesktopOrLaptop = useMediaQuery({
     query: '(min-width: 1224px)'
   })
+  const navigate = useNavigate()
   useEffect(() => {
     const checkAuth = async () => {
       const auth = await CheckAuth(api_url);
-      setIsAuth(auth);
+      if (auth.success) {
+        setIsAuth(auth.success);
+      }
+      else{
+        if(auth.error === 'Refresh_401')
+        {
+          navigate('/auth')
+        }
+        else
+        {
+          console.log(auth.error)
+        }
+      }
     };
 
     checkAuth();
@@ -83,21 +96,21 @@ function App() {
   return (
     <>
       {isTabletOrMobile && (
-        <>import './index.css';
-        <NavBar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/cart' element={<CartPage isAuth={isAuth} />} />
-          <Route path='/product-list' element={<ProductListPage />} />
-          <Route path='/product/:id' element={<Product isAuth={isAuth} />} />
-          <Route path='/auth' element={<Authenticate setIsAuth={setIsAuth} />} />
-          <Route path='/my-orders' element={<OrderListPage isAuth={isAuth} />} />
-          <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
-          {/* <Route path='/rating-form' element={<h1>Rating Form</h1>} /> */}
-          <Route path='/my-account' element={<AccountPage />} />
-          <Route path='/offer/:id' element={<OfferPage />} />
-        </Routes>
-      </>)}
+        <>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/cart' element={<CartPage isAuth={isAuth} />} />
+            <Route path='/product-list' element={<ProductListPage />} />
+            <Route path='/product/:id' element={<Product isAuth={isAuth} />} />
+            <Route path='/auth' element={<Authenticate setIsAuth={setIsAuth} />} />
+            <Route path='/my-orders' element={<OrderListPage isAuth={isAuth} />} />
+            <Route path='/order' element={<OrderPage isAuth={isAuth} />} />
+            {/* <Route path='/rating-form' element={<h1>Rating Form</h1>} /> */}
+            <Route path='/my-account' element={<AccountPage />} />
+            <Route path='/offer/:id' element={<OfferPage />} />
+          </Routes>
+        </>)}
       {isDesktopOrLaptop &&
         <DesktopMessage />
       }

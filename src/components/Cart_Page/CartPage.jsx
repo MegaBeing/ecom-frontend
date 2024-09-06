@@ -27,7 +27,7 @@ const Title = styled.div`
     color: #0175c3;
 `
 const ButtonContainer = styled.div`
-    box-shadow: 0 -2px 5px gray;
+    box-shadow: 0 -2px 2px #c7c7c7;
     border-radius: 20px 20px 0 0 ;
     padding: 5% 0;
     background-color: #fffefe;
@@ -48,6 +48,35 @@ export default function CartPage({ isAuth }) {
     const [cartList, setCartList] = useState([]);
     const [billing, setBilling] = useState([]);
     const [addchange, setAddChange] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(null)
+    const addresses = [
+        {
+            id: 1,
+            type: 'home',
+            billing_address_name: 'Sahil Jain',
+            billing_address_phone: '+91 77011423',
+            compiled_address: 'tower no. 8, flat no. 003, Nri City (GH-1), Greater Noida, 201310, Uttar Pradesh, India',
+            address_line1: 'tower no. 8, flat no. 003 ',
+            address_line2: 'Nri City (GH-1)',
+            city: 'Greater Noida',
+            state: 'Uttar Pradesh',
+            pincode: '201310',
+            country: 'India'
+        },
+        {
+            id: 2,
+            type: 'office',
+            billing_address_name: 'Rahul saha',
+            billing_address_phone: '+01 232342342',
+            compiled_address: 'tower no. 8, flat no. 003, Nri City (GH-1), Greater Noida, 201310, Uttar Pradesh, India',
+            address_line1: 'tower no. 8, flat no. 003 ',
+            address_line2: 'Nri City (GH-1)',
+            city: 'Greater Noida',
+            state: 'Uttar Pradesh',
+            pincode: '201310',
+            country: 'India'
+        },
+    ]
     const cartData = async () => {
         try {
             const response = await fetch(`${api_url}/user/cart`, {
@@ -94,7 +123,11 @@ export default function CartPage({ isAuth }) {
                 <Spacer height={30} />
                 <CartTotal elements={billing} />
                 <ButtonContainer>
-                    <Address setAddChange={setAddChange} />
+                    <Address 
+                    setAddChange={setAddChange} 
+                    addresses={addresses} 
+                    activeIndex={activeIndex} 
+                    setActiveIndex={setActiveIndex} />
                     <Spacer height={20} />
                     <Button
                         sx={{ width: '90%', borderRadius: '30px' }}
@@ -104,7 +137,7 @@ export default function CartPage({ isAuth }) {
                     </Button>
                 </ButtonContainer>
                 <CSSTransition in={addchange} timeout={200} classNames='address-adder' unmountOnExit>
-                    <AddressChanger setAddChange={setAddChange} />
+                    <AddressChanger setAddChange={setAddChange} addresses={addresses} activeIndex={activeIndex}/>
                 </CSSTransition>
             </>
         ) : (

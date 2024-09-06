@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Button } from '@mui/material';
+import { Button, IconButton } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import CreateIcon from '@mui/icons-material/Create';
+import shadows from '@mui/material/styles/shadows';
 const Container = styled.div`
     width: 100%;
     display:flex;
@@ -36,12 +37,11 @@ const AddressName = styled.div`
     user-select: none;
 `
 const Spacer = styled.div`
-    width: 62px;
+    width: 43px;
 `
 const buttonSx = {
     borderRadius: '20px',
     color: 'gray',
-    border: '1px solid gray',
     backgroundColor: 'white',
     width: 'fit-content',
 }
@@ -50,13 +50,13 @@ export default function CheckedAddress(props) {
         <Container>
             <CheckContainer className={props.active ? 'active' : undefined} onClick={() => props.setActiveIndex(props.index)}>
                 <AddressName>
-                    {props.address_name}
+                    {props.type}
                 </AddressName>
                 {props.active && <CheckIcon sx={{ marginRight: '10px' }} />}
             </CheckContainer>
-            {props.active ? (<Button variant='contained' sx={buttonSx} onClick={() => props.setAddChange(true)}>
+            {props.active ? (<IconButton variant='contained' sx={buttonSx} onClick={() => props.setAddChange(true)}>
                 <CreateIcon />
-            </Button>) : (<Spacer />)}
+            </IconButton>) : (<Spacer />)}
         </Container>
     )
 }
