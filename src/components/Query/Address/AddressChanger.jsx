@@ -3,7 +3,7 @@ import { Button, TextField } from "@mui/material"
 import CloseIcon from '@mui/icons-material/Close';
 import { IconButton } from "@mui/material"
 import MenuItem from '@mui/material/MenuItem';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 const OuterContainer = styled.div`
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
@@ -51,7 +51,7 @@ const TwoFields = styled.div`
     justify-content:space-between;
     align-items: center;
 `
-export default function AddressForm({ setAddChange, addresses, activeIndex }) {
+export default function AddressForm({ setAddChange, addresses, activeIndex, addressData}) {
     const billing_address_name_ref = useRef('test')
     const billing_address_phone_ref = useRef('test')
     const address_line1_ref = useRef('test')
@@ -60,6 +60,7 @@ export default function AddressForm({ setAddChange, addresses, activeIndex }) {
     const state_ref = useRef('test')
     const country_ref = useRef('test')
     const pincode_ref = useRef('test')
+    const url = import.meta.env.VITE_API_URL
     let fields = [
         {
             'actual': 'billing_address_name',
@@ -112,6 +113,32 @@ export default function AddressForm({ setAddChange, addresses, activeIndex }) {
             display: 'Office'
         }
     ]
+    const updateAddress = async () =>
+    {
+        try{
+            const payload = {}
+            fields.forEach((value) => {
+                payload[value.actual] = value.ref.current.value;
+            })                                    
+            const id = addresses[activeIndex].id
+            const response = await fetch(`${url}/user/user_address/${id}/`,
+                {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+                    },
+                    body: JSON.stringify(payload)
+                }
+            )
+            if(response.ok){
+                setAddChange(false);
+                addressData();
+            }
+        }catch(error){
+            console.error(error);
+        }
+    }
     useEffect(() => {
         // console.log('in_use_effect')
         fields.forEach((element) => {
@@ -166,7 +193,7 @@ export default function AddressForm({ setAddChange, addresses, activeIndex }) {
                     <TextField inputRef={fields[7].ref} label={fields[7].display} variant='standard' sx={{ width: '40%' }} />
                 </TwoFields>
                 <Spacer height={80} />
-                <Button variant="contained">Submit</Button>
+                <Button variant="contained" onClick={() => updateAddress()}>Submit</Button>
             </InnerContainer>
         </OuterContainer>
     );
