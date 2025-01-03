@@ -1,8 +1,38 @@
-# React + Vite
+# E-Commerce Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Frontend Repository
 
-Currently, two official plugins are available:
+### Overview
+This repository contains the frontend code for the mobile-first e-commerce application. Built with React, it handles the user interface and interactions for a seamless shopping experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Technologies Used
+- **Framework**: React
+- **Purpose**: Provides a responsive and interactive mobile-friendly user interface.
+
+### Features (Current)
+- Mobile-friendly user interface for browsing and shopping.
+- Secure communication with the backend API.
+
+### Installation and Setup
+#### Prerequisites
+- Node.js (v16 or later)
+
+#### Steps
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/MegaBeing/ecom-frontend.git
+    ```
+2. Navigate to the frontend directory:
+    ```bash
+    cd ecom-frontend
+    ```
+3. Install dependencies:
+    ```bash
+    npm install
+    ```
+4. Start the development server:
+    ```bash
+    npm start
+    ```
+
+---
